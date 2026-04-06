@@ -17,7 +17,7 @@ export function QuoteFormSection() {
           {/* Background photo — branded truck in action */}
           <div className="absolute inset-0" aria-hidden="true">
             <Image
-              src="/images/hero-truck-action.jpg"
+              src="/images/hero-truck-action.png"
               alt="Varsity branded truck and operator on riding mower at a premium home"
               fill
               className="object-cover"

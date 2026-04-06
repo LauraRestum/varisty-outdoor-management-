@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { clsx } from 'clsx'
@@ -12,9 +12,17 @@ const HEADLINES = [
   { line1: 'YEAR-ROUND', line2: 'OUTDOOR PROS' },
 ]
 
+// 3 Gemini-generated brand videos cycle as hero background
+const HERO_VIDEOS = [
+  '/videos/varsity-hero-1.mp4',
+  '/videos/varsity-hero-2.mp4',
+  '/videos/varsity-hero-3.mov',
+]
+
+// Photo slides shown as fallback / when video is unsupported
 const HERO_SLIDES = [
-  { src: '/images/hero-truck-action.jpg', alt: 'Varsity branded truck and operator on riding mower at premium suburban home' },
-  { src: '/images/hero-shirt-house.jpg', alt: 'Varsity team member in branded shirt standing in front of a well-landscaped home' },
+  { src: '/images/hero-truck-action.png', alt: 'Varsity branded truck and operator on riding mower at premium suburban home' },
+  { src: '/images/hero-shirt-house.png', alt: 'Varsity team member in branded shirt standing in front of a well-landscaped home' },
 ]
 
 const TRUST_BADGES = [
@@ -26,8 +34,12 @@ const TRUST_BADGES = [
 export function HeroSection() {
   const [activeHeadline, setActiveHeadline] = useState(0)
   const [activeSlide, setActiveSlide] = useState(0)
+  const [activeVideo, setActiveVideo] = useState(0)
   const [fading, setFading] = useState(false)
+  const [videoError, setVideoError] = useState(false)
+  const videoRef = useRef<HTMLVideoElement>(null)
 
+  // Cycle headlines and photo slides every 4s
   useEffect(() => {
     const interval = setInterval(() => {
       setFading(true)
@@ -40,17 +52,48 @@ export function HeroSection() {
     return () => clearInterval(interval)
   }, [])
 
+  // Cycle to next video when current one ends
+  const handleVideoEnded = () => {
+    setActiveVideo((prev) => (prev + 1) % HERO_VIDEOS.length)
+  }
+
+  // Reset video src on video index change
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.load()
+      videoRef.current.play().catch(() => setVideoError(true))
+    }
+  }, [activeVideo])
+
   const { line1, line2 } = HEADLINES[activeHeadline]
 
   return (
     <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-dark-bg">
-      {/* Background photo slides */}
+      {/* Video background — autoplays muted, cycles through 3 Gemini brand videos */}
+      {!videoError && (
+        <video
+          ref={videoRef}
+          key={activeVideo}
+          className="absolute inset-0 w-full h-full object-cover"
+          autoPlay
+          muted
+          playsInline
+          preload="metadata"
+          onEnded={handleVideoEnded}
+          onError={() => setVideoError(true)}
+          aria-hidden="true"
+        >
+          <source src={HERO_VIDEOS[activeVideo]} type={HERO_VIDEOS[activeVideo].endsWith('.mov') ? 'video/quicktime' : 'video/mp4'} />
+        </video>
+      )}
+
+      {/* Photo slides — show as primary if video errors, or as cycling background behind video when not playing */}
       {HERO_SLIDES.map((slide, i) => (
         <div
           key={slide.src}
           className={clsx(
             'absolute inset-0 transition-opacity duration-1000',
-            i === activeSlide ? 'opacity-100' : 'opacity-0'
+            videoError ? (i === activeSlide ? 'opacity-100' : 'opacity-0') : 'opacity-0'
           )}
           aria-hidden="true"
         >

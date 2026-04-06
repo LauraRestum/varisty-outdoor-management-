@@ -39,7 +39,7 @@ export default function AboutPage() {
         {/* Background photo */}
         <div className="absolute inset-0" aria-hidden="true">
           <Image
-            src="/images/hero-shirt-house.jpg"
+            src="/images/hero-shirt-house.png"
             alt="Varsity Outdoor Management team member in branded shirt in front of a well-landscaped home"
             fill
             className="object-cover"

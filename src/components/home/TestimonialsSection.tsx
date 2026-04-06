@@ -83,7 +83,7 @@ export function TestimonialsSection() {
           {/* Background photo */}
           <div className="absolute inset-0" aria-hidden="true">
             <Image
-              src="/images/brand-sign-tagline.jpg"
+              src="/images/yard-sign-tagline.png"
               alt="Varsity Outdoor Management yard sign with tagline on striped lawn"
               fill
               className="object-cover"

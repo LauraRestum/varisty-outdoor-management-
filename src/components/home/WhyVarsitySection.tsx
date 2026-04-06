@@ -97,7 +97,7 @@ export function WhyVarsitySection() {
           {/* Brand photo — lawn sign on perfectly mowed lawn */}
           <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-dark-border">
             <Image
-              src="/images/brand-sign-lawn.jpg"
+              src="/images/yard-sign.png"
               alt="Varsity Outdoor Management yard sign planted in perfectly mowing-striped lawn"
               fill
               className="object-cover"
