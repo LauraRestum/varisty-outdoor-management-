@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { clsx } from 'clsx'
 import { Menu, Phone } from 'lucide-react'
@@ -45,13 +46,17 @@ export function Navbar() {
             {/* Logo */}
             <Link
               href="/"
-              className="font-condensed text-xl md:text-2xl font-black uppercase tracking-tight flex-shrink-0"
+              className="flex-shrink-0 flex items-center"
+              aria-label="Varsity Outdoor Management — home"
             >
-              <span className="text-brand-green">VARSITY</span>{' '}
-              <span className="text-white">OUTDOOR</span>
-              <span className="hidden sm:inline text-gray-500 font-light text-sm ml-2 normal-case tracking-normal">
-                Management
-              </span>
+              <Image
+                src="/images/logo-white.png"
+                alt="Varsity Outdoor Management"
+                width={160}
+                height={40}
+                className="h-10 w-auto"
+                priority
+              />
             </Link>
 
             {/* Desktop Nav */}

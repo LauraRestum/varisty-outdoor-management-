@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { Shield, Clock, Smartphone, Star, Users, Leaf } from 'lucide-react'
 
 const DIFFERENTIATORS = [
@@ -55,7 +56,7 @@ export function WhyVarsitySection() {
   return (
     <section className="py-20 md:py-28 bg-dark-card border-y border-dark-border" id="why-varsity">
       <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
-        {/* Header */}
+        {/* Header: 2-col on desktop — text left, brand photo right */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-16">
           <div>
             <span className="inline-block text-brand-green text-sm font-bold uppercase tracking-widest mb-3">
@@ -66,9 +67,7 @@ export function WhyVarsitySection() {
               <span className="text-brand-green">AVERAGE</span>{' '}
               LAWN GUY
             </h2>
-          </div>
-          <div>
-            <p className="text-gray-400 text-lg leading-relaxed">
+            <p className="text-gray-400 text-lg leading-relaxed mt-6">
               Varsity Outdoor Management was built on the idea that professional landscaping should
               be exactly that — professional. From our communication to our cut quality, we operate
               like a championship team.
@@ -93,6 +92,16 @@ export function WhyVarsitySection() {
                 </p>
               </div>
             </div>
+          </div>
+
+          {/* Brand photo — lawn sign on perfectly mowed lawn */}
+          <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-dark-border">
+            <Image
+              src="/images/brand-sign-lawn.jpg"
+              alt="Varsity Outdoor Management yard sign planted in perfectly mowing-striped lawn"
+              fill
+              className="object-cover"
+            />
           </div>
         </div>
 

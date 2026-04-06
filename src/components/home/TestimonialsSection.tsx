@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef } from 'react'
+import Image from 'next/image'
 import { Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react'
 
 const TESTIMONIALS = [
@@ -77,26 +78,40 @@ export function TestimonialsSection() {
   return (
     <section className="py-20 md:py-28 bg-dark-card border-y border-dark-border" id="testimonials">
       <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
-        {/* Header */}
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-12 gap-6">
-          <div>
-            <span className="inline-block text-brand-green text-sm font-bold uppercase tracking-widest mb-3">
-              Customer Reviews
-            </span>
-            <h2 className="font-condensed text-4xl md:text-6xl font-black uppercase text-white">
-              WHAT OUR <span className="text-brand-green">CLIENTS</span> SAY
-            </h2>
+        {/* Header with brand-sign-tagline backdrop */}
+        <div className="relative rounded-2xl overflow-hidden mb-12">
+          {/* Background photo */}
+          <div className="absolute inset-0" aria-hidden="true">
+            <Image
+              src="/images/brand-sign-tagline.jpg"
+              alt="Varsity Outdoor Management yard sign with tagline on striped lawn"
+              fill
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-black/70" />
           </div>
 
-          {/* Rating Summary */}
-          <div className="bg-dark-bg border border-dark-border rounded-2xl px-6 py-4 text-center flex-shrink-0">
-            <div className="font-condensed text-5xl font-black text-brand-green">5.0</div>
-            <div className="flex justify-center text-brand-green my-1">
-              {'★★★★★'.split('').map((star, i) => (
-                <span key={i}>{star}</span>
-              ))}
+          {/* Header content */}
+          <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between p-8 md:p-12 gap-6">
+            <div>
+              <span className="inline-block text-brand-green text-sm font-bold uppercase tracking-widest mb-3">
+                Customer Reviews
+              </span>
+              <h2 className="font-condensed text-4xl md:text-6xl font-black uppercase text-white">
+                WHAT OUR <span className="text-brand-green">CLIENTS</span> SAY
+              </h2>
             </div>
-            <div className="text-gray-400 text-sm">120+ Google Reviews</div>
+
+            {/* Rating Summary */}
+            <div className="bg-dark-bg/80 backdrop-blur-sm border border-dark-border rounded-2xl px-6 py-4 text-center flex-shrink-0">
+              <div className="font-condensed text-5xl font-black text-brand-green">5.0</div>
+              <div className="flex justify-center text-brand-green my-1">
+                {'★★★★★'.split('').map((star, i) => (
+                  <span key={i}>{star}</span>
+                ))}
+              </div>
+              <div className="text-gray-400 text-sm">120+ Google Reviews</div>
+            </div>
           </div>
         </div>
 

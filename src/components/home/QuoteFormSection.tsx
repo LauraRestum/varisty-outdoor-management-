@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight, Check } from 'lucide-react'
 
 const INCLUDED = [
@@ -13,14 +14,16 @@ export function QuoteFormSection() {
     <section className="py-20 md:py-28 bg-dark-bg" id="quote">
       <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
         <div className="relative rounded-3xl overflow-hidden bg-dark-card border border-dark-border">
-          {/* Background accent */}
-          <div className="absolute inset-0 bg-gradient-to-br from-brand-green/10 via-transparent to-transparent pointer-events-none" />
-          <div
-            className="absolute top-0 right-0 w-1/2 h-full pointer-events-none opacity-30"
-            style={{
-              background: 'radial-gradient(circle at 80% 50%, rgba(34,197,94,0.15), transparent 60%)',
-            }}
-          />
+          {/* Background photo — branded truck in action */}
+          <div className="absolute inset-0" aria-hidden="true">
+            <Image
+              src="/images/hero-truck-action.jpg"
+              alt="Varsity branded truck and operator on riding mower at a premium home"
+              fill
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/75 to-black/60" />
+          </div>
 
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-10 p-8 md:p-12 lg:p-16 items-center">
             {/* Left: Content */}

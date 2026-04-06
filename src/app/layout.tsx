@@ -42,11 +42,18 @@ export const metadata: Metadata = {
     title: 'Varsity Outdoor Management | Professional Lawn & Landscape Services',
     description:
       'Professional lawn care, landscaping, snow removal, and outdoor management services. Get a free quote today.',
+    images: [
+      {
+        url: '/images/logo-white.png',
+        alt: 'Varsity Outdoor Management',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Varsity Outdoor Management',
     description: 'Professional lawn care & outdoor management services.',
+    images: ['/images/logo-white.png'],
   },
   robots: {
     index: true,

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { clsx } from 'clsx'
 import { ArrowRight, ChevronDown, Star, Shield, Clock } from 'lucide-react'
 
@@ -9,6 +10,11 @@ const HEADLINES = [
   { line1: 'CHAMPIONSHIP', line2: 'LAWN CARE' },
   { line1: 'PRECISION', line2: 'LANDSCAPING' },
   { line1: 'YEAR-ROUND', line2: 'OUTDOOR PROS' },
+]
+
+const HERO_SLIDES = [
+  { src: '/images/hero-truck-action.jpg', alt: 'Varsity branded truck and operator on riding mower at premium suburban home' },
+  { src: '/images/hero-shirt-house.jpg', alt: 'Varsity team member in branded shirt standing in front of a well-landscaped home' },
 ]
 
 const TRUST_BADGES = [
@@ -19,6 +25,7 @@ const TRUST_BADGES = [
 
 export function HeroSection() {
   const [activeHeadline, setActiveHeadline] = useState(0)
+  const [activeSlide, setActiveSlide] = useState(0)
   const [fading, setFading] = useState(false)
 
   useEffect(() => {
@@ -26,6 +33,7 @@ export function HeroSection() {
       setFading(true)
       setTimeout(() => {
         setActiveHeadline((prev) => (prev + 1) % HEADLINES.length)
+        setActiveSlide((prev) => (prev + 1) % HERO_SLIDES.length)
         setFading(false)
       }, 300)
     }, 4000)
@@ -36,8 +44,28 @@ export function HeroSection() {
 
   return (
     <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-dark-bg">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-dark-bg via-dark-bg to-dark-card" />
+      {/* Background photo slides */}
+      {HERO_SLIDES.map((slide, i) => (
+        <div
+          key={slide.src}
+          className={clsx(
+            'absolute inset-0 transition-opacity duration-1000',
+            i === activeSlide ? 'opacity-100' : 'opacity-0'
+          )}
+          aria-hidden="true"
+        >
+          <Image
+            src={slide.src}
+            alt={slide.alt}
+            fill
+            className="object-cover"
+            priority={i === 0}
+          />
+        </div>
+      ))}
+
+      {/* Dark overlay so white text pops */}
+      <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
 
       {/* Diagonal green accent stripe */}
       <div className="hero-stripe" aria-hidden="true" />

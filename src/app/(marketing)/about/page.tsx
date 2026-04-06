@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight, Trophy, Heart, Shield, Users } from 'lucide-react'
 import type { Metadata } from 'next'
 
@@ -34,8 +35,20 @@ export default function AboutPage() {
   return (
     <div className="bg-dark-bg min-h-screen">
       {/* Hero */}
-      <section className="py-20 md:py-28 bg-dark-card border-b border-dark-border">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+      <section className="relative overflow-hidden border-b border-dark-border">
+        {/* Background photo */}
+        <div className="absolute inset-0" aria-hidden="true">
+          <Image
+            src="/images/hero-shirt-house.jpg"
+            alt="Varsity Outdoor Management team member in branded shirt in front of a well-landscaped home"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-black/65" />
+        </div>
+
+        <div className="relative z-10 py-24 md:py-36 max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
           <div className="max-w-3xl">
             <span className="inline-block text-brand-green text-sm font-bold uppercase tracking-widest mb-4">
               About Us
@@ -44,7 +57,7 @@ export default function AboutPage() {
               WE&apos;RE NOT IN THE LAWN BUSINESS.<br />
               <span className="text-brand-green">WE&apos;RE IN THE TRUST BUSINESS.</span>
             </h1>
-            <p className="text-gray-400 text-xl leading-relaxed">
+            <p className="text-gray-300 text-xl leading-relaxed">
               Varsity Outdoor Management was founded with a simple belief: homeowners deserve a lawn care company they can actually rely on. One that shows up, does excellent work, and treats every property with respect.
             </p>
           </div>
