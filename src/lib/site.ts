@@ -11,10 +11,11 @@ export const SITE = {
   phoneHref: 'tel:+13165550123',
   email: 'bergkampw@gmail.com',
   hours: 'Mon–Sat: 7am–6pm',
+  // Leave a link empty ('') to hide that icon
   social: {
-    facebook: '#',
-    instagram: '#',
-    linkedin: '#',
+    facebook: '',
+    instagram: '',
+    linkedin: 'https://www.linkedin.com/company/varsity-outdoor-services/',
   },
 } as const
 

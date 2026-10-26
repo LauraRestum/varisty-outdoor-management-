@@ -8,7 +8,7 @@ const SOCIAL = [
   { href: SITE.social.facebook, label: 'Facebook', icon: Facebook },
   { href: SITE.social.instagram, label: 'Instagram', icon: Instagram },
   { href: SITE.social.linkedin, label: 'LinkedIn', icon: Linkedin },
-]
+].filter((s) => s.href)
 
 export function Footer() {
   return (
@@ -28,6 +28,8 @@ export function Footer() {
                   key={label}
                   href={href}
                   aria-label={label}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-gold hover:border-gold hover:text-forest-dark transition-colors"
                 >
                   <Icon className="w-4 h-4" />
