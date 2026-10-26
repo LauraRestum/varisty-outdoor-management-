@@ -77,7 +77,7 @@ export async function POST(request: NextRequest) {
       await resend.emails.send({
         from: FROM_EMAIL,
         to: data.email,
-        subject: 'We received your quote request — Varsity Outdoor Management',
+        subject: 'We received your quote request — Varsity Outdoor Services',
         html: customerConfirmationEmail(data, quoteId),
       })
     } catch (emailError) {

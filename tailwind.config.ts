@@ -9,21 +9,45 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Varsity Outdoor Services brand palette
+        forest: {
+          DEFAULT: '#183A2E',
+          dark: '#10291F',
+          light: '#24503F',
+        },
+        olive: {
+          DEFAULT: '#556B3F',
+          light: '#8AA062',
+        },
+        sand: {
+          DEFAULT: '#D9C9AB',
+          light: '#F4EFE6',
+        },
+        cream: '#FAF8F3',
+        charcoal: '#1F1F1F',
+        gold: {
+          DEFAULT: '#B8995B',
+          dark: '#A0824A',
+          light: '#D2B987',
+        },
+        // Legacy tokens used by the dashboard / portal / quote form,
+        // retuned to the brand palette
         brand: {
-          green: '#22c55e',
-          'green-dark': '#16a34a',
-          'green-light': '#4ade80',
+          green: '#B8995B',
+          'green-dark': '#A0824A',
+          'green-light': '#D2B987',
         },
         dark: {
-          bg: '#0a0a0a',
-          card: '#111827',
-          border: '#1f2937',
-          muted: '#374151',
+          bg: '#10291F',
+          card: '#183A2E',
+          border: '#2B5646',
+          muted: '#356452',
         },
       },
       fontFamily: {
-        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
-        condensed: ['var(--font-barlow-condensed)', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-montserrat)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-saira)', 'system-ui', 'sans-serif'],
+        condensed: ['var(--font-saira)', 'system-ui', 'sans-serif'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -50,8 +74,8 @@ const config: Config = {
           '100%': { transform: 'translateX(0)' },
         },
         pulseGreen: {
-          '0%, 100%': { boxShadow: '0 0 0 0 rgba(34, 197, 94, 0.4)' },
-          '50%': { boxShadow: '0 0 0 8px rgba(34, 197, 94, 0)' },
+          '0%, 100%': { boxShadow: '0 0 0 0 rgba(184, 153, 91, 0.4)' },
+          '50%': { boxShadow: '0 0 0 8px rgba(184, 153, 91, 0)' },
         },
       },
     },

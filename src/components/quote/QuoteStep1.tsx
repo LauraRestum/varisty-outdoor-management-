@@ -75,7 +75,7 @@ export function QuoteStep1({ onNext }: QuoteStep1Props) {
         <Input
           label="Phone Number"
           type="tel"
-          placeholder="(614) 555-0100"
+          placeholder="(316) 555-0100"
           leftIcon={<Phone className="w-4 h-4" />}
           error={errors.phone?.message}
           required
@@ -97,7 +97,7 @@ export function QuoteStep1({ onNext }: QuoteStep1Props) {
         <div className="col-span-2 sm:col-span-1">
           <Input
             label="City"
-            placeholder="Columbus"
+            placeholder="Wichita"
             error={errors.city?.message}
             required
             {...register('city')}
@@ -105,14 +105,14 @@ export function QuoteStep1({ onNext }: QuoteStep1Props) {
         </div>
         <Input
           label="State"
-          placeholder="OH"
+          placeholder="KS"
           error={errors.state?.message}
           required
           {...register('state')}
         />
         <Input
           label="ZIP Code"
-          placeholder="43215"
+          placeholder="67202"
           error={errors.zip?.message}
           required
           {...register('zip')}

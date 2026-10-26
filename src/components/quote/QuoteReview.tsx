@@ -164,7 +164,7 @@ export function QuoteReview({ onBack, onSubmit, isSubmitting }: QuoteReviewProps
 
       {/* Privacy note */}
       <p className="text-gray-500 text-xs text-center leading-relaxed">
-        By submitting this form, you agree to be contacted by Varsity Outdoor Management about your quote.
+        By submitting this form, you agree to be contacted by Varsity Outdoor Services about your quote.
         We never share your information with third parties.
       </p>
 

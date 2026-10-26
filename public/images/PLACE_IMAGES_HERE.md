@@ -1,18 +1,25 @@
-# Brand Photography — Drop Files Here
+# Site Imagery
 
-Place the following image files directly in this `public/images/` folder.
+## Brand artwork — `public/brand/`
+Official Varsity Outdoor Services brand kit (SVG). Used by `src/components/site/Logo.tsx`.
 
-| Filename | Description | Used In |
-|---|---|---|
-| `hero-truck-action.jpg` | Black branded Ford F-150 + equipment trailer + operator on riding mower, premium suburban home, aerial-ish shot | Hero Section (Slide 1), Quote CTA Section background |
-| `hero-shirt-house.jpg` | Man in Varsity branded shirt, back to camera, standing in front of a well-landscaped home | Hero Section (Slide 2), About page hero background |
-| `brand-sign-lawn.jpg` | White Varsity yard sign planted in perfectly mowing-striped lawn, no tagline version | Why Varsity Section — right-column image panel |
-| `brand-sign-tagline.jpg` | Same yard sign with "Elevate Your Lawn, Simplify Your Life." tagline on it, striped lawn backdrop | Testimonials Section — header backdrop |
-| `logo-white.png` | Clean Varsity Outdoor Management logo on white background | Navbar logo, og:image metadata |
+| File | Used for |
+|---|---|
+| `logo-primary.svg` | Header logo (light backgrounds) |
+| `logo-primary-reversed.svg` | Footer, mobile menu, auth pages, photo overlays |
+| `badge.svg` / `badge-reversed.svg` | About page |
+| `icon-reversed.svg` | "Lawn Care" icon in the home service strip |
+| `og-image.jpg` | Social share preview |
 
-## Notes
+Favicon / Apple icon: `src/app/icon.png`, `src/app/apple-icon.png` (V monogram).
 
-- All images are served via Next.js `<Image>` component (never raw `<img>` tags)
-- Hero images use `priority` for fastest loading
-- Background-style images use `fill` with a `relative` parent container
-- Do not rename the files — the exact filenames above are already wired into the code
+## Photography — `public/images/photos/`
+Stock photography (Unsplash license) plus two crops of our own lawn photos
+(`striped-lawn.jpg`, `striped-lawn-2.jpg`). To swap in your own job photos,
+replace a file with one of the same name, or update paths in:
+
+- `src/lib/services.ts` — the photo for each service card and detail page
+- `src/lib/gallery.ts` — gallery images and their filter categories
+- `src/app/page.tsx`, `src/app/(marketing)/*/page.tsx` — hero and section photos
+
+Business details (phone, email, city, social links) live in `src/lib/site.ts`.

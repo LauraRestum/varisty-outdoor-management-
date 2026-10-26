@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --font-inter: 'Inter', system-ui, sans-serif;
-  --font-barlow-condensed: 'Barlow Condensed', system-ui, sans-serif;
+  --forest: #183a2e;
+  --gold: #b8995b;
 }
 
 * {
@@ -16,18 +16,18 @@ html {
 }
 
 body {
-  background-color: #0a0a0a;
-  color: #ffffff;
-  font-family: var(--font-inter);
+  background-color: #faf8f3;
+  color: #1f1f1f;
+  font-family: var(--font-montserrat), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 @layer base {
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-barlow-condensed), system-ui, sans-serif;
-    font-weight: 800;
-    letter-spacing: -0.02em;
+    font-family: var(--font-saira), system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.02em;
     text-transform: uppercase;
   }
 
@@ -48,6 +48,44 @@ body {
 }
 
 @layer components {
+  /* --- Varsity Outdoor Services marketing site --- */
+  .container-site {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .eyebrow {
+    @apply font-sans text-xs font-semibold uppercase tracking-[0.22em];
+  }
+
+  .heading-xl {
+    @apply font-display font-bold uppercase leading-[1.02] tracking-[0.04em] text-4xl sm:text-5xl lg:text-6xl;
+  }
+
+  .heading-lg {
+    @apply font-display font-bold uppercase leading-[1.05] tracking-[0.04em] text-3xl sm:text-4xl lg:text-5xl;
+  }
+
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 bg-gold hover:bg-gold-dark text-forest-dark
+      font-sans text-xs sm:text-sm font-bold uppercase tracking-[0.16em] px-6 py-3.5 rounded-sm
+      transition-colors duration-200 min-h-[44px];
+  }
+
+  .btn-outline-light {
+    @apply inline-flex items-center justify-center gap-2 border border-white/60 hover:border-white hover:bg-white/10 text-white
+      font-sans text-xs sm:text-sm font-bold uppercase tracking-[0.16em] px-6 py-3.5 rounded-sm
+      transition-colors duration-200 min-h-[44px];
+  }
+
+  .link-arrow {
+    @apply inline-flex items-center gap-1.5 font-sans text-[11px] font-bold uppercase tracking-[0.18em] text-forest hover:text-gold-dark transition-colors;
+  }
+
+  .field {
+    @apply w-full bg-white border border-sand rounded-sm px-4 py-3 text-sm text-charcoal placeholder:text-charcoal/50
+      focus:outline-none focus:border-forest focus:ring-2 focus:ring-forest/15 transition-colors;
+  }
+
   .section-padding {
     @apply px-4 md:px-8 lg:px-12;
   }
@@ -57,11 +95,11 @@ body {
   }
 
   .green-glow {
-    box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+    box-shadow: 0 0 20px rgba(184, 153, 91, 0.3);
   }
 
   .green-glow-lg {
-    box-shadow: 0 0 40px rgba(34, 197, 94, 0.4);
+    box-shadow: 0 0 40px rgba(184, 153, 91, 0.4);
   }
 
   .card-dark {
@@ -69,7 +107,7 @@ body {
   }
 
   .text-gradient-green {
-    background: linear-gradient(135deg, #22c55e, #4ade80);
+    background: linear-gradient(135deg, #b8995b, #d2b987);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -105,7 +143,7 @@ body {
   top: 0;
   bottom: 0;
   width: 3px;
-  background: #22c55e;
+  background: #b8995b;
   cursor: ew-resize;
   z-index: 10;
 }
@@ -119,7 +157,7 @@ body {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #22c55e;
+  background: #b8995b;
   border: 3px solid white;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
@@ -130,23 +168,23 @@ body {
 }
 
 .dashboard-scroll::-webkit-scrollbar-track {
-  background: #111827;
+  background: #183a2e;
 }
 
 .dashboard-scroll::-webkit-scrollbar-thumb {
-  background: #374151;
+  background: #356452;
   border-radius: 2px;
 }
 
 .dashboard-scroll::-webkit-scrollbar-thumb:hover {
-  background: #22c55e;
+  background: #b8995b;
 }
 
 /* Form input focus ring */
 .input-focus {
   outline: none;
-  border-color: #22c55e;
-  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.15);
+  border-color: #b8995b;
+  box-shadow: 0 0 0 3px rgba(184, 153, 91, 0.15);
 }
 
 /* Animated gradient border */
@@ -157,7 +195,7 @@ body {
 }
 
 .gradient-border {
-  background: linear-gradient(45deg, #22c55e, #16a34a, #4ade80, #22c55e);
+  background: linear-gradient(45deg, #b8995b, #a0824a, #d2b987, #b8995b);
   background-size: 300% 300%;
   animation: gradientBorder 4s ease infinite;
 }
@@ -169,7 +207,7 @@ body {
   height: 100%;
   right: -10%;
   top: 0;
-  background: rgba(34, 197, 94, 0.08);
+  background: rgba(184, 153, 91, 0.08);
   clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
   pointer-events: none;
 }
