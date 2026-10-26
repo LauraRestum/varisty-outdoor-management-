@@ -38,7 +38,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
   }
 
   return (
-    <div className="min-h-screen bg-dark-bg flex">
+    <div className="min-h-screen bg-dark-bg text-white flex">
       {/* Desktop Sidebar */}
       <aside className="hidden md:flex flex-col w-64 bg-dark-card border-r border-dark-border fixed h-full">
         {/* Logo */}

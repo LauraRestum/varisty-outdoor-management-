@@ -1,164 +1,74 @@
-'use client'
-
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { contactFormSchema } from '@/lib/validations'
-import type { ContactFormData } from '@/lib/validations'
-import { Input, Textarea } from '@/components/ui/Input'
-import { Button } from '@/components/ui/Button'
-import { Phone, Mail, MapPin, Clock, Check } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
+import type { Metadata } from 'next'
+import { Phone, Mail, MapPin, Clock } from 'lucide-react'
+import { ContactForm } from '@/components/site/ContactForm'
+import { Logo } from '@/components/site/Logo'
+import { SITE } from '@/lib/site'
+
+export const metadata: Metadata = {
+  title: 'Get a Quote',
+  description: `Request a free quote from ${SITE.name}. Tell us about your outdoor needs and our team will get back to you quickly.`,
+}
+
+const DETAILS = [
+  { icon: Phone, value: SITE.phone, href: SITE.phoneHref },
+  { icon: Mail, value: SITE.email, href: `mailto:${SITE.email}` },
+  { icon: MapPin, value: SITE.city, href: null },
+  { icon: Clock, value: SITE.hours, href: null },
+]
 
 export default function ContactPage() {
-  const [submitted, setSubmitted] = useState(false)
-  const [loading, setLoading] = useState(false)
-
-  const { register, handleSubmit, formState: { errors } } = useForm<ContactFormData>({
-    resolver: zodResolver(contactFormSchema),
-  })
-
-  async function onSubmit(data: ContactFormData) {
-    setLoading(true)
-    // Simulate form submission — in production, use Resend or a form service
-    await new Promise((r) => setTimeout(r, 1200))
-    setLoading(false)
-    setSubmitted(true)
-  }
-
   return (
-    <div className="bg-dark-bg min-h-screen">
-      {/* Hero */}
-      <section className="py-16 md:py-20 bg-dark-card border-b border-dark-border">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 text-center">
-          <span className="inline-block text-brand-green text-sm font-bold uppercase tracking-widest mb-3">
-            Get in Touch
-          </span>
-          <h1 className="font-condensed text-5xl md:text-6xl font-black uppercase text-white mb-4">
-            WE&apos;D LOVE TO <span className="text-brand-green">HEAR FROM YOU</span>
-          </h1>
-          <p className="text-gray-400 text-xl max-w-2xl mx-auto">
-            Questions about services, pricing, or scheduling? Reach out and we&apos;ll get back to you fast.
-          </p>
-        </div>
-      </section>
+    <>
+      <section className="bg-white">
+        <div className="container-site py-16 md:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+          <div>
+            <p className="eyebrow text-olive mb-4">Get a Quote</p>
+            <h1 className="heading-xl text-forest">
+              Let&apos;s talk
+              <br />
+              about your
+              <br />
+              outdoor needs.
+            </h1>
+            <p className="mt-6 text-charcoal/75 leading-relaxed max-w-md">
+              Fill out the form and our team will get back to you quickly.
+            </p>
+            <ul className="mt-8 space-y-4">
+              {DETAILS.map(({ icon: Icon, value, href }) => (
+                <li key={value} className="flex items-center gap-4 text-sm font-medium text-charcoal">
+                  <Icon className="w-5 h-5 text-forest flex-shrink-0" />
+                  {href ? (
+                    <a href={href} className="hover:text-forest transition-colors break-all">{value}</a>
+                  ) : (
+                    <span>{value}</span>
+                  )}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-10 text-sm text-charcoal/70">
+              Want to give us property details up front?{' '}
+              <Link href="/quote" className="font-semibold text-forest underline underline-offset-4 decoration-gold hover:text-gold-dark">
+                Use our detailed quote form
+              </Link>
+              .
+            </p>
+          </div>
 
-      <section className="py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Contact Info */}
-            <div className="space-y-8">
-              <div>
-                <h2 className="font-condensed text-3xl font-bold uppercase text-white mb-6">
-                  Contact Information
-                </h2>
-                <div className="space-y-5">
-                  {[
-                    { icon: Phone, label: 'Phone', value: '(123) 456-7890', href: 'tel:+1234567890' },
-                    { icon: Mail, label: 'Email', value: 'bergkampw@gmail.com', href: 'mailto:bergkampw@gmail.com' },
-                    { icon: MapPin, label: 'Service Area', value: 'Columbus, OH & Surrounding Areas', href: null },
-                    { icon: Clock, label: 'Hours', value: 'Mon–Sat: 7am–6pm | Emergency snow 24/7', href: null },
-                  ].map(({ icon: Icon, label, value, href }) => (
-                    <div key={label} className="flex items-start gap-4">
-                      <div className="w-12 h-12 rounded-xl bg-brand-green/10 border border-brand-green/20 flex items-center justify-center flex-shrink-0">
-                        <Icon className="w-5 h-5 text-brand-green" />
-                      </div>
-                      <div>
-                        <p className="text-gray-500 text-sm font-semibold uppercase tracking-wide">{label}</p>
-                        {href ? (
-                          <a href={href} className="text-white font-semibold hover:text-brand-green transition-colors">
-                            {value}
-                          </a>
-                        ) : (
-                          <p className="text-white font-semibold">{value}</p>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Quick Quote CTA */}
-              <div className="bg-dark-card border border-brand-green/30 rounded-2xl p-6">
-                <h3 className="font-condensed text-xl font-bold uppercase text-white mb-2">
-                  Need a Price? Get a Quote
-                </h3>
-                <p className="text-gray-400 text-sm mb-4">
-                  The fastest way to get pricing is our online quote form. Takes under 3 minutes.
-                </p>
-                <Link
-                  href="/quote"
-                  className="inline-flex items-center gap-2 bg-brand-green hover:bg-brand-green-dark text-black font-black px-6 py-3 rounded-xl transition-colors text-sm uppercase"
-                >
-                  Get a Free Quote
-                </Link>
-              </div>
-            </div>
-
-            {/* Contact Form */}
-            <div className="bg-dark-card border border-dark-border rounded-2xl p-7">
-              {submitted ? (
-                <div className="text-center py-8">
-                  <div className="w-16 h-16 rounded-full bg-brand-green/20 border-2 border-brand-green flex items-center justify-center mx-auto mb-4">
-                    <Check className="w-8 h-8 text-brand-green" />
-                  </div>
-                  <h3 className="font-condensed text-2xl font-bold uppercase text-white mb-2">Message Sent!</h3>
-                  <p className="text-gray-400">We&apos;ll get back to you within 24 hours.</p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-                  <h2 className="font-condensed text-2xl font-bold uppercase text-white">Send a Message</h2>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <Input
-                      label="Name"
-                      placeholder="Your name"
-                      error={errors.name?.message}
-                      required
-                      {...register('name')}
-                    />
-                    <Input
-                      label="Phone (Optional)"
-                      type="tel"
-                      placeholder="(614) 555-0100"
-                      {...register('phone')}
-                    />
-                  </div>
-
-                  <Input
-                    label="Email"
-                    type="email"
-                    placeholder="your@email.com"
-                    error={errors.email?.message}
-                    required
-                    {...register('email')}
-                  />
-
-                  <Input
-                    label="Subject"
-                    placeholder="What can we help with?"
-                    error={errors.subject?.message}
-                    required
-                    {...register('subject')}
-                  />
-
-                  <Textarea
-                    label="Message"
-                    placeholder="Tell us more..."
-                    error={errors.message?.message}
-                    required
-                    {...register('message')}
-                  />
-
-                  <Button type="submit" variant="primary" size="lg" fullWidth loading={loading}>
-                    Send Message
-                  </Button>
-                </form>
-              )}
-            </div>
+          <div className="bg-white">
+            <ContactForm />
           </div>
         </div>
       </section>
-    </div>
+
+      <section className="relative overflow-hidden">
+        <Image src="/images/photos/cottage-garden.jpg" alt="" fill sizes="100vw" className="object-cover" />
+        <div className="absolute inset-0 bg-forest-dark/60" />
+        <div className="relative container-site py-20 md:py-28 flex justify-center">
+          <Logo variant="light" className="h-32 md:h-44 drop-shadow-lg" />
+        </div>
+      </section>
+    </>
   )
 }

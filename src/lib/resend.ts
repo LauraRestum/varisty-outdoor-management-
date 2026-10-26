@@ -1,7 +1,7 @@
 import { Resend } from 'resend'
 
 export const OWNER_EMAIL = process.env.OWNER_EMAIL || 'bergkampw@gmail.com'
-export const FROM_EMAIL = 'Varsity Outdoor Management <noreply@varsityoutdoor.com>'
+export const FROM_EMAIL = 'Varsity Outdoor Services <noreply@varsityoutdoor.com>'
 
 // Lazy — only instantiated when first used at runtime
 let _resend: Resend | null = null

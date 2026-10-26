@@ -4,7 +4,7 @@ import { JobStatusBadge } from '@/components/ui/Badge'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'My Dashboard | Varsity Outdoor Management',
+  title: 'My Dashboard | Varsity Outdoor Services',
 }
 
 const TODAY = new Date().toISOString().split('T')[0]

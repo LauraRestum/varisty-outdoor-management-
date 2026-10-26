@@ -24,7 +24,7 @@ export function CustomerPortalLayout({ children }: CustomerPortalLayoutProps) {
   }
 
   return (
-    <div className="min-h-screen bg-dark-bg">
+    <div className="min-h-screen bg-dark-bg text-white">
       {/* Top Nav */}
       <header className="sticky top-0 z-40 bg-dark-card border-b border-dark-border">
         <div className="max-w-5xl mx-auto px-4 md:px-6">

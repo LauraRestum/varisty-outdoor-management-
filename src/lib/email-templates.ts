@@ -59,11 +59,11 @@ export function ownerNotificationEmail(data: QuoteFormData, quoteId: string): st
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>New Quote Request</title>
 </head>
-<body style="margin:0;padding:0;background-color:#0a0a0a;font-family:system-ui,sans-serif;">
+<body style="margin:0;padding:0;background-color:#10291F;font-family:system-ui,sans-serif;">
   <div style="max-width:600px;margin:0 auto;padding:24px;">
 
     <!-- Header -->
-    <div style="background:linear-gradient(135deg,#16a34a,#22c55e);padding:24px;border-radius:12px 12px 0 0;text-align:center;">
+    <div style="background:#183A2E;padding:24px;border-radius:12px 12px 0 0;text-align:center;">
       <h1 style="margin:0;color:white;font-size:24px;font-weight:900;letter-spacing:-0.5px;text-transform:uppercase;">
         NEW QUOTE REQUEST
       </h1>
@@ -73,7 +73,7 @@ export function ownerNotificationEmail(data: QuoteFormData, quoteId: string): st
     </div>
 
     <!-- Body -->
-    <div style="background:#111827;padding:24px;border-radius:0 0 12px 12px;border:1px solid #1f2937;border-top:none;">
+    <div style="background:#183A2E;padding:24px;border-radius:0 0 12px 12px;border:1px solid #24503F;border-top:none;">
 
       ${flagBadges(data)}
 
@@ -84,19 +84,19 @@ export function ownerNotificationEmail(data: QuoteFormData, quoteId: string): st
       ` : ''}
 
       <!-- Customer Info -->
-      <div style="background:#1f2937;border-radius:8px;padding:16px;margin-bottom:16px;">
-        <h2 style="margin:0 0 12px;color:#22c55e;font-size:14px;text-transform:uppercase;letter-spacing:1px;font-weight:700;">Customer Information</h2>
+      <div style="background:#24503F;border-radius:8px;padding:16px;margin-bottom:16px;">
+        <h2 style="margin:0 0 12px;color:#B8995B;font-size:14px;text-transform:uppercase;letter-spacing:1px;font-weight:700;">Customer Information</h2>
         <table style="width:100%;border-collapse:collapse;">
           <tr><td style="color:#9ca3af;padding:4px 0;width:120px;">Name</td><td style="color:white;font-weight:600;">${data.firstName} ${data.lastName}</td></tr>
-          <tr><td style="color:#9ca3af;padding:4px 0;">Email</td><td style="color:white;"><a href="mailto:${data.email}" style="color:#22c55e;">${data.email}</a></td></tr>
-          <tr><td style="color:#9ca3af;padding:4px 0;">Phone</td><td style="color:white;"><a href="tel:${data.phone}" style="color:#22c55e;">${data.phone}</a></td></tr>
+          <tr><td style="color:#9ca3af;padding:4px 0;">Email</td><td style="color:white;"><a href="mailto:${data.email}" style="color:#B8995B;">${data.email}</a></td></tr>
+          <tr><td style="color:#9ca3af;padding:4px 0;">Phone</td><td style="color:white;"><a href="tel:${data.phone}" style="color:#B8995B;">${data.phone}</a></td></tr>
           <tr><td style="color:#9ca3af;padding:4px 0;">Address</td><td style="color:white;">${data.address}, ${data.city}, ${data.state} ${data.zip}</td></tr>
         </table>
       </div>
 
       <!-- Property Info -->
-      <div style="background:#1f2937;border-radius:8px;padding:16px;margin-bottom:16px;">
-        <h2 style="margin:0 0 12px;color:#22c55e;font-size:14px;text-transform:uppercase;letter-spacing:1px;font-weight:700;">Property Details</h2>
+      <div style="background:#24503F;border-radius:8px;padding:16px;margin-bottom:16px;">
+        <h2 style="margin:0 0 12px;color:#B8995B;font-size:14px;text-transform:uppercase;letter-spacing:1px;font-weight:700;">Property Details</h2>
         <table style="width:100%;border-collapse:collapse;">
           <tr><td style="color:#9ca3af;padding:4px 0;width:160px;">Property Type</td><td style="color:white;font-weight:600;text-transform:capitalize;">${data.propertyType}</td></tr>
           <tr><td style="color:#9ca3af;padding:4px 0;">Property Size</td><td style="color:white;">${PROPERTY_SIZE_LABELS[data.propertySize] || data.propertySize}</td></tr>
@@ -109,8 +109,8 @@ export function ownerNotificationEmail(data: QuoteFormData, quoteId: string): st
       </div>
 
       <!-- Services Requested -->
-      <div style="background:#1f2937;border-radius:8px;padding:16px;margin-bottom:16px;">
-        <h2 style="margin:0 0 12px;color:#22c55e;font-size:14px;text-transform:uppercase;letter-spacing:1px;font-weight:700;">Services Requested</h2>
+      <div style="background:#24503F;border-radius:8px;padding:16px;margin-bottom:16px;">
+        <h2 style="margin:0 0 12px;color:#B8995B;font-size:14px;text-transform:uppercase;letter-spacing:1px;font-weight:700;">Services Requested</h2>
         <p style="margin:0 0 8px;color:white;font-weight:600;">${formatServices(data.services)}</p>
         <p style="margin:0;color:#9ca3af;">Frequency: ${FREQUENCY_LABELS[data.frequency] || data.frequency}</p>
         ${data.services.includes('snow-removal') && data.snowRemovalPriority ? `
@@ -120,15 +120,15 @@ export function ownerNotificationEmail(data: QuoteFormData, quoteId: string): st
 
       ${data.details ? `
       <!-- Additional Details -->
-      <div style="background:#1f2937;border-radius:8px;padding:16px;margin-bottom:16px;">
-        <h2 style="margin:0 0 12px;color:#22c55e;font-size:14px;text-transform:uppercase;letter-spacing:1px;font-weight:700;">Additional Details</h2>
+      <div style="background:#24503F;border-radius:8px;padding:16px;margin-bottom:16px;">
+        <h2 style="margin:0 0 12px;color:#B8995B;font-size:14px;text-transform:uppercase;letter-spacing:1px;font-weight:700;">Additional Details</h2>
         <p style="margin:0;color:#d1d5db;line-height:1.6;">${data.details}</p>
       </div>
       ` : ''}
 
       <!-- CTA -->
       <div style="text-align:center;margin-top:24px;">
-        <a href="${appUrl}/dashboard/quotes" style="display:inline-block;background:#22c55e;color:black;font-weight:900;padding:14px 32px;border-radius:8px;text-decoration:none;font-size:16px;text-transform:uppercase;letter-spacing:0.5px;">
+        <a href="${appUrl}/dashboard/quotes" style="display:inline-block;background:#B8995B;color:black;font-weight:900;padding:14px 32px;border-radius:8px;text-decoration:none;font-size:16px;text-transform:uppercase;letter-spacing:0.5px;">
           View in Dashboard →
         </a>
         <p style="margin:12px 0 0;color:#6b7280;font-size:12px;">Quote ID: ${quoteId}</p>
@@ -137,7 +137,7 @@ export function ownerNotificationEmail(data: QuoteFormData, quoteId: string): st
 
     <!-- Footer -->
     <p style="text-align:center;color:#4b5563;font-size:12px;margin-top:16px;">
-      Varsity Outdoor Management — Owner Notification System
+      Varsity Outdoor Services — Owner Notification System
     </p>
   </div>
 </body>
@@ -154,11 +154,11 @@ export function customerConfirmationEmail(data: QuoteFormData, quoteId: string):
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Quote Request Received</title>
 </head>
-<body style="margin:0;padding:0;background-color:#0a0a0a;font-family:system-ui,sans-serif;">
+<body style="margin:0;padding:0;background-color:#10291F;font-family:system-ui,sans-serif;">
   <div style="max-width:600px;margin:0 auto;padding:24px;">
 
     <!-- Header -->
-    <div style="background:linear-gradient(135deg,#16a34a,#22c55e);padding:32px 24px;border-radius:12px 12px 0 0;text-align:center;">
+    <div style="background:#183A2E;padding:32px 24px;border-radius:12px 12px 0 0;text-align:center;">
       <h1 style="margin:0 0 8px;color:white;font-size:28px;font-weight:900;letter-spacing:-0.5px;text-transform:uppercase;">
         VARSITY OUTDOOR
       </h1>
@@ -168,19 +168,19 @@ export function customerConfirmationEmail(data: QuoteFormData, quoteId: string):
     </div>
 
     <!-- Body -->
-    <div style="background:#111827;padding:32px 24px;border-radius:0 0 12px 12px;border:1px solid #1f2937;border-top:none;">
+    <div style="background:#183A2E;padding:32px 24px;border-radius:0 0 12px 12px;border:1px solid #24503F;border-top:none;">
 
       <p style="color:#d1d5db;font-size:18px;margin:0 0 24px;line-height:1.6;">
         Hi <strong style="color:white;">${data.firstName}</strong>,
       </p>
 
       <p style="color:#d1d5db;font-size:16px;margin:0 0 16px;line-height:1.6;">
-        Thanks for reaching out! We've received your quote request and our team will review it shortly. You can expect to hear from us within <strong style="color:#22c55e;">1-2 business days</strong>.
+        Thanks for reaching out! We've received your quote request and our team will review it shortly. You can expect to hear from us within <strong style="color:#B8995B;">1-2 business days</strong>.
       </p>
 
       <!-- Summary Box -->
-      <div style="background:#1f2937;border-radius:8px;padding:20px;margin:24px 0;border-left:4px solid #22c55e;">
-        <h3 style="margin:0 0 16px;color:#22c55e;font-size:14px;text-transform:uppercase;letter-spacing:1px;font-weight:700;">Your Request Summary</h3>
+      <div style="background:#24503F;border-radius:8px;padding:20px;margin:24px 0;border-left:4px solid #B8995B;">
+        <h3 style="margin:0 0 16px;color:#B8995B;font-size:14px;text-transform:uppercase;letter-spacing:1px;font-weight:700;">Your Request Summary</h3>
         <table style="width:100%;border-collapse:collapse;">
           <tr><td style="color:#9ca3af;padding:6px 0;width:140px;">Services</td><td style="color:white;font-weight:600;">${formatServices(data.services)}</td></tr>
           <tr><td style="color:#9ca3af;padding:6px 0;">Property Size</td><td style="color:white;">${PROPERTY_SIZE_LABELS[data.propertySize] || data.propertySize}</td></tr>
@@ -198,17 +198,17 @@ export function customerConfirmationEmail(data: QuoteFormData, quoteId: string):
       </p>
 
       <p style="margin:0 0 24px;">
-        <strong style="color:white;">Varsity Outdoor Management</strong><br>
-        <a href="mailto:bergkampw@gmail.com" style="color:#22c55e;text-decoration:none;">bergkampw@gmail.com</a>
+        <strong style="color:white;">Varsity Outdoor Services</strong><br>
+        <a href="mailto:bergkampw@gmail.com" style="color:#B8995B;text-decoration:none;">bergkampw@gmail.com</a>
       </p>
 
-      <p style="color:#6b7280;font-size:13px;margin:0;border-top:1px solid #1f2937;padding-top:16px;">
+      <p style="color:#6b7280;font-size:13px;margin:0;border-top:1px solid #24503F;padding-top:16px;">
         Quote reference: ${quoteId}
       </p>
     </div>
 
     <p style="text-align:center;color:#4b5563;font-size:12px;margin-top:16px;">
-      © ${new Date().getFullYear()} Varsity Outdoor Management. All rights reserved.
+      © ${new Date().getFullYear()} Varsity Outdoor Services. All rights reserved.
     </p>
   </div>
 </body>

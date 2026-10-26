@@ -1,147 +1,118 @@
-import Link from 'next/link'
 import Image from 'next/image'
+import Link from 'next/link'
 import { ArrowRight, Trophy, Heart, Shield, Users } from 'lucide-react'
 import type { Metadata } from 'next'
+import { ValueIcons, WinningTeamBanner, QuoteCta } from '@/components/site/Blocks'
+import { Badge } from '@/components/site/Logo'
+import { SITE } from '@/lib/site'
 
 export const metadata: Metadata = {
-  title: 'About Varsity Outdoor Management | Our Story & Values',
-  description: 'Learn about Varsity Outdoor Management — our story, our team, and our commitment to championship-level outdoor care. Serving Central Ohio.',
+  title: 'About Us',
+  description: `${SITE.name} is a locally owned and operated outdoor service company in ${SITE.city}, committed to quality work and reliable service.`,
 }
 
 const VALUES = [
   {
     icon: Trophy,
-    title: 'Championship Standards',
-    description: 'We hold ourselves to the same standard athletes use to win championships. Every job, every visit — no exceptions.',
+    title: 'A Higher Standard',
+    description: 'Every job, every visit, done the right way. We hold our work to the standard we would want at our own homes.',
   },
   {
     icon: Heart,
     title: 'We Care',
-    description: 'We treat every property like it\'s our own. That means going the extra mile even when no one is watching.',
+    description: 'We treat every property like it is our own, and go the extra mile even when no one is watching.',
   },
   {
     icon: Shield,
     title: 'Reliability',
-    description: 'We do what we say we\'ll do, when we say we\'ll do it. No surprises, no excuses, no no-shows.',
+    description: 'We do what we say we will do, when we say we will do it. No surprises and no no-shows.',
   },
   {
     icon: Users,
     title: 'Community',
-    description: 'We\'re a local business that roots for our community. We hire locally, buy locally, and give back whenever we can.',
+    description: `We are a local business that roots for ${SITE.city.split(',')[0]}. We hire locally and give back whenever we can.`,
   },
 ]
 
 export default function AboutPage() {
   return (
-    <div className="bg-dark-bg min-h-screen">
-      {/* Hero */}
-      <section className="relative overflow-hidden border-b border-dark-border">
-        {/* Background photo */}
-        <div className="absolute inset-0" aria-hidden="true">
-          <Image
-            src="/images/hero-shirt-house.png"
-            alt="Varsity Outdoor Management team member in branded shirt in front of a well-landscaped home"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-black/65" />
-        </div>
-
-        <div className="relative z-10 py-24 md:py-36 max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <span className="inline-block text-brand-green text-sm font-bold uppercase tracking-widest mb-4">
-              About Us
-            </span>
-            <h1 className="font-condensed text-5xl md:text-7xl font-black uppercase text-white mb-6">
-              WE&apos;RE NOT IN THE LAWN BUSINESS.<br />
-              <span className="text-brand-green">WE&apos;RE IN THE TRUST BUSINESS.</span>
+    <>
+      <section className="bg-cream">
+        <div className="container-site grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center py-16 md:py-24">
+          <div>
+            <p className="eyebrow text-olive mb-4">About Us</p>
+            <h1 className="heading-xl text-forest">
+              Built on
+              <br />
+              hard work
+              <br />
+              and a higher
+              <br />
+              standard.
             </h1>
-            <p className="text-gray-300 text-xl leading-relaxed">
-              Varsity Outdoor Management was founded with a simple belief: homeowners deserve a lawn care company they can actually rely on. One that shows up, does excellent work, and treats every property with respect.
+            <p className="mt-6 text-charcoal/75 leading-relaxed max-w-lg">
+              {SITE.name} is a locally owned and operated outdoor service company committed to quality work,
+              reliable service and great looking properties.
             </p>
+            <Link href="#story" className="btn-gold mt-8">
+              Our Story <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+          <div className="relative aspect-[4/5] sm:aspect-[5/4] lg:aspect-[4/5] overflow-hidden shadow-2xl">
+            <Image
+              src="/images/photos/brick-home.jpg"
+              alt="Well maintained home and lawn"
+              fill
+              priority
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-cover"
+            />
           </div>
         </div>
       </section>
 
-      {/* Story */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="font-condensed text-4xl font-black uppercase text-white mb-6">
-                Our <span className="text-brand-green">Story</span>
-              </h2>
-              <div className="space-y-4 text-gray-400 leading-relaxed">
-                <p>
-                  Varsity Outdoor Management started with a pickup truck, a mower, and a commitment to doing things right. While other companies cut corners, we cut grass — with sharp blades, consistent crews, and real communication.
-                </p>
-                <p>
-                  Over the years, we&apos;ve grown into a full-service outdoor management company serving hundreds of properties across Central Ohio. But we haven&apos;t lost sight of what made us great: showing up when we say we will and doing work we&apos;re proud of.
-                </p>
-                <p>
-                  Today, Varsity offers everything from weekly lawn mowing to complete landscape installations, snow removal, irrigation, fertilization, and beyond. One company. One relationship. Complete care.
-                </p>
-              </div>
-            </div>
+      <ValueIcons />
 
-            {/* Stats */}
-            <div className="grid grid-cols-2 gap-4">
-              {[
-                { number: '8+', label: 'Years in Business' },
-                { number: '500+', label: 'Properties Served' },
-                { number: '5.0', label: 'Star Google Rating' },
-                { number: '12mo', label: 'Year-Round Service' },
-              ].map(({ number, label }) => (
-                <div key={label} className="bg-dark-card border border-dark-border rounded-2xl p-6 text-center">
-                  <div className="font-condensed text-5xl font-black text-brand-green mb-1">{number}</div>
-                  <div className="text-gray-400 text-sm">{label}</div>
-                </div>
-              ))}
+      <section id="story" className="bg-white scroll-mt-28">
+        <div className="container-site py-20 md:py-28 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-4 flex justify-center">
+            <Badge className="w-56 h-56 md:w-72 md:h-72" />
+          </div>
+          <div className="lg:col-span-8">
+            <p className="eyebrow text-olive mb-3">Our Story</p>
+            <h2 className="heading-lg text-forest">Go with the winning team.</h2>
+            <div className="mt-6 space-y-4 text-charcoal/80 leading-relaxed">
+              <p>
+                Varsity started with a simple idea: homeowners and businesses deserve outdoor services they can count on.
+                Crews that show up when they say they will, do the job right, and leave every property looking sharp.
+              </p>
+              <p>
+                Like any good team, we win through preparation, consistency and pride in the details. That is the
+                standard we bring to every lawn, bed and walkway we touch across {SITE.city}.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Values */}
-      <section className="py-16 bg-dark-card border-y border-dark-border">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="font-condensed text-4xl md:text-5xl font-black uppercase text-white">
-              What We <span className="text-brand-green">Stand For</span>
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+      <section className="bg-cream border-t border-sand/60">
+        <div className="container-site py-20 md:py-24">
+          <p className="eyebrow text-olive mb-3">What We Stand For</p>
+          <h2 className="heading-lg text-forest mb-12">Our values</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {VALUES.map(({ icon: Icon, title, description }) => (
-              <div key={title} className="bg-dark-bg rounded-xl p-6 border border-dark-border">
-                <div className="w-12 h-12 rounded-xl bg-brand-green/10 border border-brand-green/20 flex items-center justify-center mb-4">
-                  <Icon className="w-6 h-6 text-brand-green" />
-                </div>
-                <h3 className="font-condensed text-lg font-bold uppercase text-white mb-2">{title}</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">{description}</p>
+              <div key={title} className="bg-white border border-sand/60 p-7 border-t-4 border-t-forest">
+                <Icon strokeWidth={1.5} className="w-8 h-8 text-gold" />
+                <h3 className="mt-5 font-display text-xl font-bold uppercase tracking-[0.06em] text-forest">{title}</h3>
+                <p className="mt-2 text-sm text-charcoal/70 leading-relaxed">{description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-16">
-        <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="font-condensed text-4xl font-black uppercase text-white mb-4">
-            Ready to Work with <span className="text-brand-green">a Team You Can Trust?</span>
-          </h2>
-          <p className="text-gray-400 mb-8">Get your free quote and see the Varsity difference for yourself.</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/quote" className="inline-flex items-center justify-center gap-2 bg-brand-green hover:bg-brand-green-dark text-black font-black px-8 py-4 rounded-xl transition-colors text-lg uppercase">
-              Get a Free Quote <ArrowRight className="w-5 h-5" />
-            </Link>
-            <Link href="/contact" className="inline-flex items-center justify-center gap-2 border border-dark-border hover:border-brand-green/50 text-white font-bold px-8 py-4 rounded-xl transition-colors text-lg uppercase">
-              Contact Us
-            </Link>
-          </div>
-        </div>
-      </section>
-    </div>
+      <WinningTeamBanner image="/images/photos/garden-path.jpg" />
+      <QuoteCta />
+    </>
   )
 }
