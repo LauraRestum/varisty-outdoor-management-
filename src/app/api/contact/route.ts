@@ -3,6 +3,7 @@ export const dynamic = 'force-dynamic'
 import { NextRequest, NextResponse } from 'next/server'
 import { contactFormSchema } from '@/lib/validations'
 import { resend, OWNER_EMAIL, FROM_EMAIL } from '@/lib/resend'
+import { sendLeadToSheet } from '@/lib/google-sheet'
 
 function escapeHtml(value: string) {
   return value
@@ -25,7 +26,20 @@ export async function POST(request: NextRequest) {
 
     const { name, email, phone, subject, message } = result.data
 
-    await resend.emails.send({
+    // Primary path: Google Sheet logs the lead and sends the emails
+    const savedToSheet = await sendLeadToSheet({
+      name,
+      email,
+      phone,
+      service: subject,
+      details: message,
+      source: 'Website – Get a Quote',
+      notify: true,
+    })
+    if (savedToSheet) return NextResponse.json({ success: true })
+
+    // Fallback so a lead is never lost if the sheet is unavailable
+    const { error: emailError } = await resend.emails.send({
       from: FROM_EMAIL,
       to: OWNER_EMAIL,
       reply_to: email,
@@ -40,6 +54,7 @@ export async function POST(request: NextRequest) {
         <p>${escapeHtml(message).replace(/\n/g, '<br />')}</p>
       `,
     })
+    if (emailError) throw new Error(`Resend: ${emailError.message}`)
 
     return NextResponse.json({ success: true })
   } catch (error) {

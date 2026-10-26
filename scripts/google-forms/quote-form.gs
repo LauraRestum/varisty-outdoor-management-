@@ -10,6 +10,17 @@
  * setup() creates the form, links it to this spreadsheet (responses land in
  * a "Form Responses" tab), and turns on an email for every new submission.
  * The form's share link is written into the first tab of the spreadsheet.
+ *
+ * Connect the website (so its quote forms land in the same tab):
+ *   5. Deploy → New deployment → gear icon → Web app.
+ *      Execute as: Me. Who has access: Anyone. Click Deploy, copy the URL.
+ *   6. In Vercel (Project → Settings → Environment Variables) add:
+ *        GOOGLE_SHEET_WEBHOOK_URL    = the Web app URL from step 5
+ *        GOOGLE_SHEET_WEBHOOK_SECRET = the "Website secret" from the first tab
+ *      Then redeploy the site.
+ *
+ * Updating this script later? Paste the new version, Save, run setup() again,
+ * then Deploy → Manage deployments → edit (pencil) → Version: New version.
  */
 
 const CONFIG = {
@@ -46,11 +57,17 @@ function setup() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   const props = PropertiesService.getDocumentProperties();
 
+  props.setProperty('SHEET_ID', ss.getId());
+  if (!props.getProperty('WEBHOOK_SECRET')) {
+    props.setProperty('WEBHOOK_SECRET', Utilities.getUuid().replace(/-/g, ''));
+  }
+
   const existingId = props.getProperty('FORM_ID');
   if (existingId) {
     const existing = FormApp.openById(existingId);
-    Logger.log('Form already set up: ' + existing.getPublishedUrl());
     installTrigger_(ss);
+    writeInfoTab_(ss, existing);
+    Logger.log('Form already set up: ' + existing.getPublishedUrl());
     return;
   }
 
@@ -90,8 +107,13 @@ function setup() {
   if (parents.hasNext()) DriveApp.getFileById(form.getId()).moveTo(parents.next());
 
   installTrigger_(ss);
+  writeInfoTab_(ss, form);
 
-  // Write the links into the first tab for easy reference
+  Logger.log('Done! Share this link: ' + form.getPublishedUrl());
+}
+
+// Links and the website secret, in the first tab for easy reference
+function writeInfoTab_(ss, form) {
   let shortUrl = form.getPublishedUrl();
   try {
     shortUrl = form.shortenFormUrl(shortUrl);
@@ -99,20 +121,20 @@ function setup() {
     // Short links aren't always available; the full link works the same
   }
 
-  const info = ss.getSheets()[0];
+  const info = ss.getSheets().find((sh) => !sh.getFormUrl()) || ss.insertSheet('Setup', 0);
   info.clear();
-  info.getRange('A1:B5').setValues([
+  info.getRange('A1:B7').setValues([
     ['Varsity quote form', ''],
     ['Share this link with customers', form.getPublishedUrl()],
     ['Short link', shortUrl],
     ['Edit the form', form.getEditUrl()],
     ['New requests email', CONFIG.NOTIFY_EMAIL],
+    ['', ''],
+    ['Website secret (GOOGLE_SHEET_WEBHOOK_SECRET)', PropertiesService.getDocumentProperties().getProperty('WEBHOOK_SECRET')],
   ]);
   info.getRange('A1').setFontWeight('bold').setFontSize(14);
-  info.setColumnWidth(1, 240);
+  info.setColumnWidth(1, 320);
   info.setColumnWidth(2, 520);
-
-  Logger.log('Done! Share this link: ' + form.getPublishedUrl());
 }
 
 function installTrigger_(ss) {
@@ -135,6 +157,80 @@ function onQuoteSubmit(e) {
     details: get(Q.details),
   };
 
+  notify_(r, 'Google Form', CONFIG.SEND_CUSTOMER_CONFIRMATION);
+}
+
+// Website submissions: POST JSON to the web app URL (see setup steps 5–6)
+function doPost(e) {
+  let body;
+  try {
+    body = JSON.parse((e.postData && e.postData.contents) || '{}');
+  } catch (err) {
+    return json_({ ok: false, error: 'Invalid JSON' });
+  }
+
+  const props = PropertiesService.getDocumentProperties();
+  const secret = props.getProperty('WEBHOOK_SECRET');
+  if (!secret || body.secret !== secret) {
+    return json_({ ok: false, error: 'Unauthorized' });
+  }
+
+  const r = {
+    name: clean_(body.name),
+    email: clean_(body.email),
+    phone: clean_(body.phone),
+    address: clean_(body.address),
+    service: clean_(body.service),
+    details: clean_(body.details, 4000),
+  };
+  if (!r.name || !r.email) return json_({ ok: false, error: 'Missing name or email' });
+  const source = clean_(body.source) || 'Website';
+
+  const lock = LockService.getDocumentLock();
+  lock.waitLock(20000);
+  try {
+    appendRow_(r, source);
+  } finally {
+    lock.releaseLock();
+  }
+
+  // The detailed website quote form already sends its own emails
+  if (body.notify !== false) notify_(r, source, CONFIG.SEND_CUSTOMER_CONFIRMATION);
+
+  return json_({ ok: true });
+}
+
+// Add a row to the form's responses tab, matching its column headers
+function appendRow_(r, source) {
+  const ss = SpreadsheetApp.openById(PropertiesService.getDocumentProperties().getProperty('SHEET_ID'));
+  const sheet = ss.getSheets().find((sh) => sh.getFormUrl()) || ss.getSheetByName('Website Requests') || ss.insertSheet('Website Requests');
+
+  let lastCol = Math.max(sheet.getLastColumn(), 1);
+  let headers = sheet.getRange(1, 1, 1, lastCol).getValues()[0].map(String);
+  if (!headers.filter(String).length) {
+    headers = ['Timestamp', Q.name, Q.email, Q.phone, Q.address, Q.service, Q.details];
+    sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+  }
+  if (headers.indexOf('Source') === -1) {
+    headers = headers.filter(String).concat('Source');
+    sheet.getRange(1, headers.length).setValue('Source');
+  }
+
+  const values = {
+    Timestamp: new Date(),
+    Source: source,
+  };
+  values[Q.name] = r.name;
+  values[Q.email] = r.email;
+  values[Q.phone] = r.phone;
+  values[Q.address] = r.address;
+  values[Q.service] = r.service;
+  values[Q.details] = r.details;
+
+  sheet.appendRow(headers.map((h) => (h in values ? values[h] : '')));
+}
+
+function notify_(r, source, confirmCustomer) {
   const rows = [
     ['Name', r.name],
     ['Email', r.email],
@@ -142,12 +238,13 @@ function onQuoteSubmit(e) {
     ['Address', r.address || '—'],
     ['Service', r.service],
     ['Project details', r.details],
+    ['Source', source],
   ];
 
   MailApp.sendEmail({
     to: CONFIG.NOTIFY_EMAIL,
     replyTo: r.email || CONFIG.NOTIFY_EMAIL,
-    name: CONFIG.BUSINESS_NAME + ' Website',
+    name: CONFIG.BUSINESS_NAME + ' Leads',
     subject: 'New Quote Request — ' + r.name + ' — ' + r.service,
     htmlBody: emailShell_(
       'New quote request',
@@ -169,7 +266,7 @@ function onQuoteSubmit(e) {
     ),
   });
 
-  if (CONFIG.SEND_CUSTOMER_CONFIRMATION && r.email) {
+  if (confirmCustomer && r.email) {
     MailApp.sendEmail({
       to: r.email,
       replyTo: CONFIG.NOTIFY_EMAIL,
@@ -189,6 +286,14 @@ function onQuoteSubmit(e) {
       ),
     });
   }
+}
+
+function json_(obj) {
+  return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
+}
+
+function clean_(v, max) {
+  return String(v == null ? '' : v).trim().slice(0, max || 500);
 }
 
 function emailShell_(heading, inner) {
