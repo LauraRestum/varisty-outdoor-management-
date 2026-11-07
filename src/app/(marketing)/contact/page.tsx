@@ -1,21 +1,20 @@
 import Image from 'next/image'
-import Link from 'next/link'
 import type { Metadata } from 'next'
-import { Phone, Mail, MapPin, Clock } from 'lucide-react'
+import { Phone, Mail, MapPin, MessageSquare } from 'lucide-react'
 import { ContactForm } from '@/components/site/ContactForm'
 import { Logo } from '@/components/site/Logo'
 import { SITE } from '@/lib/site'
 
 export const metadata: Metadata = {
   title: 'Get a Quote',
-  description: `Request a free quote from ${SITE.name}. Tell us about your outdoor needs and our team will get back to you quickly.`,
+  description: `Request a free quote from ${SITE.name}. Call, text, or email and we will get back to you quickly.`,
 }
 
 const DETAILS = [
-  { icon: Phone, value: SITE.phone, href: SITE.phoneHref },
+  { icon: Phone, value: `Call ${SITE.phone}`, href: SITE.phoneHref },
+  { icon: MessageSquare, value: `Text ${SITE.phone}`, href: SITE.smsHref },
   { icon: Mail, value: SITE.email, href: `mailto:${SITE.email}` },
-  { icon: MapPin, value: SITE.city, href: null },
-  { icon: Clock, value: SITE.hours, href: null },
+  { icon: MapPin, value: `${SITE.city} and surrounding areas`, href: null },
 ]
 
 export default function ContactPage() {
@@ -33,7 +32,8 @@ export default function ContactPage() {
               outdoor needs.
             </h1>
             <p className="mt-6 text-charcoal/75 leading-relaxed max-w-md">
-              Fill out the form and our team will get back to you quickly.
+              Call, text, or email us directly. Or fill this out and we&apos;ll turn it into a ready-to-send text or
+              email for you.
             </p>
             <ul className="mt-8 space-y-4">
               {DETAILS.map(({ icon: Icon, value, href }) => (
@@ -47,13 +47,6 @@ export default function ContactPage() {
                 </li>
               ))}
             </ul>
-            <p className="mt-10 text-sm text-charcoal/70">
-              Want to give us property details up front?{' '}
-              <Link href="/quote" className="font-semibold text-forest underline underline-offset-4 decoration-gold hover:text-gold-dark">
-                Use our detailed quote form
-              </Link>
-              .
-            </p>
           </div>
 
           <div className="bg-white">

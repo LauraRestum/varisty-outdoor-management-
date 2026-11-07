@@ -4,7 +4,8 @@ import { ArrowRight, Check } from 'lucide-react'
 import type { Metadata } from 'next'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
-import { ServiceIconStrip, WinningTeamBanner, QuoteCta, SectionHeading } from '@/components/site/Blocks'
+import { ServiceIconStrip, WinningTeamBanner, QuoteCta, SectionHeading, PreBookBand } from '@/components/site/Blocks'
+import { PROMO } from '@/lib/promo'
 import { ServiceCard } from '@/components/site/ServiceCard'
 import { SERVICES } from '@/lib/services'
 import { GALLERY } from '@/lib/gallery'
@@ -14,13 +15,11 @@ export const metadata: Metadata = {
   title: `${SITE.name} | Professional Outdoor Services in ${SITE.city}`,
 }
 
-const HERO_SERVICES = ['Lawn Care', 'Landscaping', 'Tree & Shrub Care', 'Snow Removal', 'Clean Ups']
-
 const WHY = [
   'Locally owned and operated',
   'Consistent crew on your property',
   'Clear communication and scheduling',
-  'Fully insured for your protection',
+  'One point of contact for everything outside',
 ]
 
 export default function HomePage() {
@@ -41,27 +40,24 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-r from-forest-dark/90 via-forest-dark/60 to-transparent" />
           <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-forest/80 to-transparent" />
           <div className="relative container-site pt-24 pb-28 md:pt-36 md:pb-40">
+            <p className="eyebrow text-gold mb-5">Now booking fall cleanups and the {PROMO.season} season</p>
             <h1 className="heading-xl max-w-2xl drop-shadow-sm">
-              Professional
+              Get your yard
               <br />
-              Outdoor Services
+              ready for spring
               <br />
-              For a Higher Standard.
+              before winter hits.
             </h1>
-            <p className="mt-6 max-w-2xl text-[11px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-white/90 leading-loose">
-              {HERO_SERVICES.map((s, i) => (
-                <span key={s}>
-                  {s}
-                  {i < HERO_SERVICES.length - 1 && <span className="mx-2 text-gold">|</span>}
-                </span>
-              ))}
+            <p className="mt-6 max-w-xl text-white/90 leading-relaxed">
+              Prepay your {PROMO.season} Spring Refresh by {PROMO.deadline} and save {PROMO.discount}, plus pick{' '}
+              {PROMO.freeAddOnCount} free add-ons.
             </p>
             <div className="mt-9 flex flex-col sm:flex-row gap-3">
-              <Link href="/contact" className="btn-gold">
-                Get a Quote <ArrowRight className="w-4 h-4" />
+              <Link href="/spring-refresh" className="btn-gold">
+                Pre-Book Spring <ArrowRight className="w-4 h-4" />
               </Link>
-              <Link href="/services" className="btn-outline-light">
-                Our Services
+              <Link href="/contact?service=seasonal-cleanup" className="btn-outline-light">
+                Fall Cleanup Quote
               </Link>
             </div>
           </div>
@@ -117,7 +113,7 @@ export default function HomePage() {
               <SectionHeading
                 eyebrow="Our Services"
                 title="Complete outdoor solutions."
-                lead="From routine maintenance to full property care, we keep your outdoor spaces looking their best."
+                lead="Fall cleanups now, a Spring Refresh to start the season, and sharp-looking lawns all summer."
               />
               <Link href="/services" className="link-arrow flex-shrink-0">
                 View all services <ArrowRight className="w-3.5 h-3.5" />
@@ -130,6 +126,8 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+
+        <PreBookBand />
 
         <WinningTeamBanner />
 

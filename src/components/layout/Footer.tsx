@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { Facebook, Instagram, Linkedin, ArrowRight, Phone, Mail, MapPin } from 'lucide-react'
 import { Logo } from '@/components/site/Logo'
 import { NAV_LINKS, SITE } from '@/lib/site'
-import { SERVICES } from '@/lib/services'
+import { SERVICES, serviceHref } from '@/lib/services'
 
 const SOCIAL = [
   { href: SITE.social.facebook, label: 'Facebook', icon: Facebook },
@@ -56,7 +56,7 @@ export function Footer() {
             <ul className="space-y-3">
               {SERVICES.map((s) => (
                 <li key={s.slug}>
-                  <Link href={`/services/${s.slug}`} className="text-sm text-white/80 hover:text-gold transition-colors">
+                  <Link href={serviceHref(s)} className="text-sm text-white/80 hover:text-gold transition-colors">
                     {s.title}
                   </Link>
                 </li>
@@ -92,7 +92,6 @@ export function Footer() {
         <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/60">
           <p>© {new Date().getFullYear()} {SITE.name}. All rights reserved.</p>
           <div className="flex items-center gap-5">
-            <Link href="/login" className="hover:text-gold transition-colors">Client Login</Link>
             <span>{SITE.city}</span>
           </div>
         </div>
