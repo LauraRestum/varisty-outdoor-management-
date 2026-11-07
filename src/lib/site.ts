@@ -7,10 +7,11 @@ export const SITE = {
   tagline: 'Professional outdoor services for a higher standard.',
   slogan: 'Go with the winning team.',
   city: 'Wichita, KS',
-  phone: '316.555.0123',
-  phoneHref: 'tel:+13165550123',
-  email: 'bergkampw@gmail.com',
-  hours: 'Mon–Sat: 7am–6pm',
+  phone: '316.259.5763',
+  phoneHref: 'tel:+13162595763',
+  smsHref: 'sms:+13162595763',
+  email: 'varsityoutdoorservices@gmail.com',
+  hours: 'Call or text anytime',
   // Leave a link empty ('') to hide that icon
   social: {
     facebook: '',
@@ -22,7 +23,18 @@ export const SITE = {
 export const NAV_LINKS = [
   { href: '/', label: 'Home' },
   { href: '/services', label: 'Services' },
+  { href: '/spring-refresh', label: '2027 Pre-Book' },
   { href: '/about', label: 'About' },
   { href: '/gallery', label: 'Gallery' },
   { href: '/contact', label: 'Contact' },
 ] as const
+
+// Builds a text-message link with a prefilled body. iOS and Android both
+// accept the "?&body=" form.
+export function smsLink(body: string) {
+  return `${SITE.smsHref}?&body=${encodeURIComponent(body)}`
+}
+
+export function mailLink(subject: string, body: string) {
+  return `mailto:${SITE.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+}

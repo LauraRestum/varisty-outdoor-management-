@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import type { Metadata } from 'next'
 import { ArrowRight, Check, Leaf, Star, Home } from 'lucide-react'
 import { QuoteCta } from '@/components/site/Blocks'
@@ -30,6 +30,7 @@ const PROMISES = [
 export default function ServiceDetailPage({ params }: Props) {
   const service = getService(params.slug)
   if (!service) notFound()
+  if (service.href) redirect(service.href)
 
   const others = SERVICES.filter((s) => s.slug !== service.slug).slice(0, 3)
 
@@ -74,7 +75,7 @@ export default function ServiceDetailPage({ params }: Props) {
                     </li>
                   ))}
                 </ul>
-                <Link href="/contact" className="btn-gold w-full mt-8">
+                <Link href={`/contact?service=${service.slug}`} className="btn-gold w-full mt-8">
                   Get a Quote <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>

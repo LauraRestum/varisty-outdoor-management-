@@ -1,12 +1,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
-import type { Service } from '@/lib/services'
+import { serviceHref, type Service } from '@/lib/services'
 
 export function ServiceCard({ service }: { service: Service }) {
   return (
     <Link
-      href={`/services/${service.slug}`}
+      href={serviceHref(service)}
       className="group flex flex-col bg-white border border-sand/60 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
     >
       <div className="relative aspect-[4/3] overflow-hidden">

@@ -8,6 +8,7 @@ import { Menu, ArrowRight } from 'lucide-react'
 import { MobileMenu } from './MobileMenu'
 import { Logo } from '@/components/site/Logo'
 import { NAV_LINKS } from '@/lib/site'
+import { PROMO } from '@/lib/promo'
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -33,7 +34,13 @@ export function Navbar() {
 
   return (
     <>
-      <div className="h-1.5 bg-forest" />
+      <Link
+        href="/spring-refresh"
+        className="block bg-forest text-white text-center text-xs sm:text-sm font-semibold px-4 py-2.5 hover:bg-forest-light transition-colors"
+      >
+        Pre-book your {PROMO.season} Spring Refresh by {PROMO.deadline}: save {PROMO.discount} + {PROMO.freeAddOnCount} free
+        add-ons <ArrowRight className="inline w-3.5 h-3.5 text-gold" />
+      </Link>
       <header
         className={clsx(
           'sticky top-0 z-40 w-full bg-white transition-shadow duration-300',
@@ -46,7 +53,7 @@ export function Navbar() {
               <Logo className="h-12 md:h-16" priority />
             </Link>
 
-            <nav className="hidden lg:flex items-center gap-9" aria-label="Main navigation">
+            <nav className="hidden lg:flex items-center gap-7" aria-label="Main navigation">
               {NAV_LINKS.map((link) => (
                 <Link
                   key={link.href}

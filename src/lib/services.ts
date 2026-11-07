@@ -1,5 +1,6 @@
-// Service catalogue for the marketing site. Slugs match the service enum
-// used by the quote form, API, and dashboard — don't rename them.
+// Service catalogue for the marketing site. Older slugs match the service enum
+// used by the dashboard, so don't rename them. Snow removal, irrigation,
+// hardscaping, and fertilization are no longer offered and are not listed.
 
 export type ServiceSlug =
   | 'lawn-mowing'
@@ -10,6 +11,9 @@ export type ServiceSlug =
   | 'hardscaping'
   | 'fertilization'
   | 'seasonal-cleanup'
+  | 'spring-refresh'
+  | 'storm-cleanup'
+  | 'event-ready'
 
 export interface Service {
   slug: ServiceSlug
@@ -19,146 +23,132 @@ export interface Service {
   image: string
   includes: string[]
   metaDescription: string
+  // Optional custom page; otherwise /services/[slug]
+  href?: string
 }
 
 export const SERVICES: Service[] = [
   {
-    slug: 'lawn-mowing',
-    title: 'Lawn Care',
-    short: 'Mowing, edging, trimming and more.',
+    slug: 'seasonal-cleanup',
+    title: 'Fall Cleanup',
+    short: 'Leaves, beds, and light limbs cleared so your yard is ready for winter.',
     intro:
-      'A healthy, well maintained lawn makes a lasting impression. Our professional lawn care services keep your property looking clean, green and its best all season long.',
-    image: '/images/photos/striped-lawn.jpg',
+      'Leaves left sitting all winter smother your grass and invite mold. We clear the lawn and beds, cut back what is done for the year, and haul it all away so your yard comes back strong in spring.',
+    image: '/images/photos/brick-home.jpg',
     includes: [
-      'Routine mowing with sharp blades',
-      'Edging and trimming',
-      'Clipping clean up and blow-off',
-      'Weekly or bi-weekly scheduling',
-      'Consistent crew on your property',
+      'Leaf removal from the lawn and beds',
+      'Dead plants cut back',
+      'Light limb removal and haul-away',
+      'Final cut of the season, a little shorter to prevent matting and mold',
+      'Everything hauled away',
     ],
     metaDescription:
-      'Routine mowing, edging, trimming and clean up. Weekly and bi-weekly lawn care plans from Varsity Outdoor Services.',
+      'Fall leaf removal, bed cleanup, and final mow of the season in Wichita from Varsity Outdoor Services.',
   },
   {
-    slug: 'landscaping',
-    title: 'Landscaping',
-    short: 'Design, installation and enhancements.',
+    slug: 'spring-refresh',
+    title: 'Spring Refresh',
+    href: '/spring-refresh',
+    short: 'Everything winter left behind, cleaned up before your first mow.',
     intro:
-      'From a simple bed refresh to a complete property transformation, our team brings your vision to life with quality plants, expert installation and lasting results.',
-    image: '/images/photos/flower-bed.jpg',
+      'One visit that takes your yard from winter-worn to spring-ready. Book now for the 2027 season to save and pick two free add-ons.',
+    image: '/images/photos/crew-planting.jpg',
     includes: [
-      'Landscape design consultation',
-      'Plant selection and installation',
-      'Bed installation, mulch and edging',
-      'Planting and bed care',
-      'Seasonal color rotation',
+      'Dead limbs, leaves, and winter debris cleared',
+      'Dead perennials and ornamental grasses cut back',
+      'Bushes and shrubs trimmed and shaped',
+      'Beds re-edged and mulch refreshed',
+      'First mow of the season',
     ],
     metaDescription:
-      'Landscape design, planting, bed installation and mulching from Varsity Outdoor Services.',
+      'Pre-book a 2027 Spring Refresh in Wichita: winter debris cleanup, shrub trimming, bed edging, and mulch refresh from Varsity Outdoor Services.',
+  },
+  {
+    slug: 'lawn-mowing',
+    title: 'Lawn Care',
+    short: 'Mow, weed eat, edge, and blow, every visit.',
+    intro:
+      'A sharp-looking lawn makes a lasting impression. Every visit is full service, and we schedule around how your lawn is actually growing, so it stays sharp from the curb to the back fence.',
+    image: '/images/photos/striped-lawn.jpg',
+    includes: [
+      'Mowing',
+      'Weed eating and trimming',
+      'Edging along walks and drives',
+      'Blow-off of clippings and debris',
+      'Scheduled around weather and growth',
+    ],
+    metaDescription:
+      'Full-service mowing, trimming, edging, and blow-off in Wichita from Varsity Outdoor Services. Booking 2027 mowing spots now.',
   },
   {
     slug: 'tree-shrub-care',
-    title: 'Tree & Shrub Care',
-    short: 'Pruning, shaping and plant health care.',
+    title: 'Shrub & Bush Trimming',
+    short: 'Clean, shaped shrubs and light limb removal.',
     intro:
-      'Your trees, shrubs and beds are living investments. Regular care keeps them healthy, shaped and looking sharp so your whole property stays on point.',
+      'Overgrown shrubs make a whole property look tired. We shape and tidy them, take down light limbs, and clean up every clipping.',
     image: '/images/photos/crew-trimming.jpg',
     includes: [
-      'Shrub trimming and shaping',
-      'Structural tree pruning',
-      'Weed control in beds',
-      'Deadwood and hazard removal',
-      'Ongoing maintenance plans',
+      'Shrub and bush shaping',
+      'Light limb removal',
+      'Cleanup of all clippings',
+      'Seasonal touch-ups',
     ],
     metaDescription:
-      'Shrub trimming, tree pruning and plant health care from Varsity Outdoor Services.',
+      'Shrub and bush trimming and light limb removal in Wichita from Varsity Outdoor Services.',
   },
   {
-    slug: 'snow-removal',
-    title: 'Snow Removal',
-    short: 'Plowing, salting and ice management.',
+    slug: 'landscaping',
+    title: 'Mulching & Bed Care',
+    short: 'Fresh mulch and clean bed edges.',
     intro:
-      'When winter hits, we are ready before the first flake falls. Driveways, walks and lots cleared quickly with plowing, salting and de-icing.',
-    image: '/images/photos/snow.jpg',
+      'Fresh mulch gives beds a clean, finished look and helps them hold moisture through Kansas summers.',
+    image: '/images/photos/flower-bed.jpg',
     includes: [
-      'Driveway and lot plowing',
-      'Salting and de-icing',
-      'Sidewalk and stair clearing',
-      'Per-storm or seasonal contracts',
-      'Priority service available',
+      'Bed refresh with new mulch',
+      'Crisp, re-cut bed edges',
+      'Hand weeding in beds',
+      'Recurring touch-ups',
     ],
     metaDescription:
-      'Snow plowing, salting and ice management for homes and businesses from Varsity Outdoor Services.',
+      'Mulching, bed edging, and bed care in Wichita from Varsity Outdoor Services.',
   },
   {
-    slug: 'seasonal-cleanup',
-    title: 'Seasonal Clean Ups',
-    short: 'Leaf removal, debris clearing and storm recovery.',
+    slug: 'storm-cleanup',
+    title: 'Storm Cleanup',
+    short: 'Branches and debris cleared after Kansas weather rolls through.',
     intro:
-      'Spring and fall clean ups get your property ready for what comes next. We clear leaves and debris, refresh beds and haul everything away.',
-    image: '/images/photos/crew-planting.jpg',
-    includes: [
-      'Leaf removal from lawn and beds',
-      'Debris and storm clean up',
-      'Bed edging and refresh',
-      'Pruning of winter damage',
-      'Haul-away included',
-    ],
-    metaDescription:
-      'Spring and fall clean ups, leaf removal and storm debris clearing from Varsity Outdoor Services.',
-  },
-  {
-    slug: 'hardscaping',
-    title: 'Hardscaping',
-    short: 'Patios, walkways, borders and walls.',
-    intro:
-      'From a simple walkway to a complete patio with borders and retaining walls, we build hardscape features that add lasting value to your home.',
-    image: '/images/photos/garden-path.jpg',
-    includes: [
-      'Paver and natural stone patios',
-      'Walkways and stepping paths',
-      'Retaining walls',
-      'Edging, gravel and borders',
-      'Fire pit surrounds',
-    ],
-    metaDescription:
-      'Paver patios, walkways, borders and retaining walls from Varsity Outdoor Services.',
-  },
-  {
-    slug: 'fertilization',
-    title: 'Fertilization',
-    short: 'Weed control and seasonal feeding programs.',
-    intro:
-      'A great lawn starts with great nutrition. Our seasonal program gives your turf exactly what it needs, when it needs it, for thick, green, weed-free grass.',
-    image: '/images/photos/lawn-closeup.jpg',
-    includes: [
-      'Seasonal fertilization program',
-      'Pre- and post-emergent weed control',
-      'Grub control',
-      'Core aeration',
-      'Overseeding thin areas',
-    ],
-    metaDescription:
-      'Lawn fertilization, weed control, aeration and overseeding from Varsity Outdoor Services.',
-  },
-  {
-    slug: 'irrigation',
-    title: 'Irrigation',
-    short: 'Startups, winterization and repairs.',
-    intro:
-      'A properly running irrigation system saves water and keeps your lawn consistently green without the hassle of watering by hand.',
+      'When wind or ice brings branches down across your yard, we clear it out and get things back to normal fast.',
     image: '/images/photos/lush-garden.jpg',
     includes: [
-      'Spring startup and inspection',
-      'Fall blowout and winterization',
-      'Head and leak repair',
-      'Smart controller upgrades',
-      'Zone optimization',
+      'Downed branch and debris removal',
+      'Light limb removal',
+      'Haul-away',
     ],
     metaDescription:
-      'Sprinkler startup, winterization and repair from Varsity Outdoor Services.',
+      'Storm debris and downed branch cleanup in Wichita from Varsity Outdoor Services.',
+  },
+  {
+    slug: 'event-ready',
+    title: 'Guest Ready',
+    short: 'Hosting the holidays or a party? We will get your yard guest-ready.',
+    intro:
+      'Holiday visitors, a graduation, or a backyard party: we give your yard an extended, detailed visit so it looks its best when guests arrive.',
+    image: '/images/photos/garden-path.jpg',
+    includes: [
+      'Detailed mow and edge',
+      'Shrub trimming',
+      'Dead flowers picked',
+      'Patio power washing',
+      'Please book 8 to 10 days ahead',
+    ],
+    metaDescription:
+      'Detailed guest-ready yard visits before holidays and events in Wichita from Varsity Outdoor Services.',
   },
 ]
+
+export function serviceHref(s: Service) {
+  return s.href ?? `/services/${s.slug}`
+}
 
 export function getService(slug: string) {
   return SERVICES.find((s) => s.slug === slug)
