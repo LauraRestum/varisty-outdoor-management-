@@ -1,6 +1,6 @@
 # Varsity Outdoor Management
 
-A full-featured business management website for Varsity Outdoor Management — a professional lawn care, landscaping, and snow removal company.
+A full-featured business management website for Varsity Outdoor Management — a professional lawn care, landscaping, and seasonal clean up company.
 
 ## Tech Stack
 
@@ -105,9 +105,9 @@ src/
 
 ### Public Website
 - Homepage with hero, services overview, stats, before/after gallery, testimonials
-- Individual service pages for all 8 services
-- Multi-step quote request form with conditional logic
-- Contact page
+- Individual service pages for each service
+- 2027 Spring Refresh pre-book offer page (`/spring-refresh`, settings in `src/lib/spring-refresh.ts`)
+- Contact page: quote requests go to William by email, call or text (`/quote` redirects here)
 - About page
 
 ### Owner Dashboard

@@ -1,14 +1,15 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import type { Metadata } from 'next'
-import { Phone, Mail, MapPin, Clock } from 'lucide-react'
-import { ContactForm } from '@/components/site/ContactForm'
+import { Phone, Mail, MapPin, Clock, Gift } from 'lucide-react'
+import { QuoteOptions } from '@/components/site/QuoteOptions'
 import { Logo } from '@/components/site/Logo'
 import { SITE } from '@/lib/site'
+import { SPRING_REFRESH as SR } from '@/lib/spring-refresh'
 
 export const metadata: Metadata = {
   title: 'Get a Quote',
-  description: `Request a free quote from ${SITE.name}. Tell us about your outdoor needs and our team will get back to you quickly.`,
+  description: `Request a free quote from ${SITE.name}. Email, call or text ${SITE.owner} and get a quick response.`,
 }
 
 const DETAILS = [
@@ -33,7 +34,8 @@ export default function ContactPage() {
               outdoor needs.
             </h1>
             <p className="mt-6 text-charcoal/75 leading-relaxed max-w-md">
-              Fill out the form and our team will get back to you quickly.
+              Email, text or call {SITE.owner} directly. Send your address and what you need, and you&apos;ll hear
+              back quickly with a free quote. Photos of the area help too!
             </p>
             <ul className="mt-8 space-y-4">
               {DETAILS.map(({ icon: Icon, value, href }) => (
@@ -47,17 +49,29 @@ export default function ContactPage() {
                 </li>
               ))}
             </ul>
-            <p className="mt-10 text-sm text-charcoal/70">
-              Want to give us property details up front?{' '}
-              <Link href="/quote" className="font-semibold text-forest underline underline-offset-4 decoration-gold hover:text-gold-dark">
-                Use our detailed quote form
-              </Link>
-              .
-            </p>
+            <Link
+              href="/spring-refresh"
+              className="mt-10 flex items-start gap-4 border-2 border-gold/60 bg-cream p-5 hover:border-gold transition-colors"
+            >
+              <Gift className="w-6 h-6 text-gold-dark flex-shrink-0 mt-0.5" />
+              <span className="text-sm text-charcoal/80 leading-relaxed">
+                <span className="block font-bold uppercase tracking-[0.12em] text-forest">
+                  Pre-book your {SR.season} Spring Refresh
+                </span>
+                Prepay by {SR.bookBy} to save {SR.discount} and get {SR.freeAddOns} free add-ons.
+              </span>
+            </Link>
           </div>
 
-          <div className="bg-white">
-            <ContactForm />
+          <div className="bg-forest text-white p-6 md:p-10 shadow-xl self-start">
+            <p className="eyebrow text-gold mb-3">Request a Quote</p>
+            <h2 className="font-display text-2xl md:text-3xl font-bold uppercase tracking-[0.06em]">
+              Pick whatever&apos;s easiest.
+            </h2>
+            <p className="mt-2 mb-7 text-sm text-white/75 leading-relaxed">
+              Email and text open with a short template, so all you have to do is fill in the blanks.
+            </p>
+            <QuoteOptions tone="dark" />
           </div>
         </div>
       </section>

@@ -5,8 +5,10 @@ import {
   ArrowRight,
   Trees,
   Home,
-  Snowflake,
-  Shovel,
+  Droplets,
+  Sprout,
+  Leaf as LeafIcon,
+  Gift,
   Shield,
   Users,
   Leaf,
@@ -14,14 +16,15 @@ import {
 } from 'lucide-react'
 import { GrassIcon } from './Logo'
 import { SITE } from '@/lib/site'
+import { SPRING_REFRESH as SR } from '@/lib/spring-refresh'
 
 // Line-icon service strip shown under the home hero (dark forest band)
 const STRIP: { label: string; href: string; icon: LucideIcon | 'grass' }[] = [
+  { label: 'Fall Clean Ups', href: '/services/seasonal-cleanup', icon: LeafIcon },
+  { label: 'Tree & Shrub Care', href: '/services/tree-shrub-care', icon: Trees },
+  { label: 'Irrigation Winterization', href: '/services/irrigation', icon: Droplets },
   { label: 'Lawn Care', href: '/services/lawn-mowing', icon: 'grass' },
-  { label: 'Landscaping', href: '/services/landscaping', icon: Trees },
-  { label: 'Tree & Shrub Care', href: '/services/tree-shrub-care', icon: Home },
-  { label: 'Snow Removal', href: '/services/snow-removal', icon: Snowflake },
-  { label: 'Clean Ups', href: '/services/seasonal-cleanup', icon: Shovel },
+  { label: 'Spring Refresh', href: '/spring-refresh', icon: Sprout },
 ]
 
 export function ServiceIconStrip({ className }: { className?: string }) {
@@ -46,6 +49,30 @@ export function ServiceIconStrip({ className }: { className?: string }) {
         </ul>
       </div>
     </div>
+  )
+}
+
+// Promo band for the pre-book Spring Refresh offer
+export function SpringRefreshBanner() {
+  return (
+    <section className="bg-sand-light border-y border-sand/60">
+      <div className="container-site py-14 md:py-16 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="lg:col-span-8">
+          <p className="eyebrow text-olive mb-3">Pre-Book Now · Book by {SR.bookBy}</p>
+          <h2 className="heading-lg text-forest">Get ahead of spring. Save {SR.discount}.</h2>
+          <p className="mt-3 text-charcoal/75 leading-relaxed max-w-2xl">
+            Prepay your {SR.season} Spring Refresh now and save {SR.discount}, plus pick {SR.freeAddOns} free add-ons like
+            curb address painting, new porch light bulbs or extra mulch. Dead limbs, leaves, trimming, fertilizing and
+            mulch, all done before your neighbors even start.
+          </p>
+        </div>
+        <div className="lg:col-span-4 flex lg:justify-end">
+          <Link href="/spring-refresh" className="btn-gold">
+            <Gift className="w-4 h-4" /> See the Offer
+          </Link>
+        </div>
+      </div>
+    </section>
   )
 }
 
@@ -119,7 +146,7 @@ export function PageHero({ eyebrow, title, lead, image }: PageHeroProps) {
 // Closing call to action
 export function QuoteCta({
   title = 'Ready for a better looking property?',
-  body = 'Tell us about your outdoor needs and our team will get back to you quickly with a free quote.',
+  body = `Email, call or text ${SITE.owner} with your address and what you need. You'll hear back quickly with a free quote.`,
 }: {
   title?: string
   body?: string

@@ -4,7 +4,7 @@ import { useFormContext } from 'react-hook-form'
 import { Button } from '@/components/ui/Button'
 import { ToggleCardGroup } from '@/components/ui/ToggleCard'
 import { CheckboxCardGroup } from '@/components/ui/CheckboxCard'
-import { ArrowRight, ArrowLeft, Scissors, Trees, Snowflake, Droplets, TreePine, Building2, Leaf, Sparkles, AlertTriangle } from 'lucide-react'
+import { ArrowRight, ArrowLeft, Scissors, Trees, Droplets, TreePine, Building2, Leaf, Sparkles, AlertTriangle } from 'lucide-react'
 import type { QuoteFormData } from '@/lib/validations'
 import type { PropertySize, ServiceType, ServiceFrequency } from '@/types'
 
@@ -29,7 +29,6 @@ const PROPERTY_TYPES = [
 const SERVICES: { value: ServiceType; label: string; description: string; icon: React.ReactNode; featured?: boolean }[] = [
   { value: 'lawn-mowing', label: 'Lawn Mowing', description: 'Regular mowing service', icon: <Scissors className="w-5 h-5" />, featured: true },
   { value: 'landscaping', label: 'Landscaping', description: 'Design & installation', icon: <Trees className="w-5 h-5" /> },
-  { value: 'snow-removal', label: 'Snow Removal', description: 'Plowing, salting & ice management', icon: <Snowflake className="w-5 h-5" /> },
   { value: 'irrigation', label: 'Irrigation', description: 'System install or repair', icon: <Droplets className="w-5 h-5" /> },
   { value: 'tree-shrub-care', label: 'Tree & Shrub Care', description: 'Pruning & treatments', icon: <TreePine className="w-5 h-5" /> },
   { value: 'hardscaping', label: 'Hardscaping', description: 'Patios, walkways, walls', icon: <Building2 className="w-5 h-5" /> },

@@ -3,7 +3,7 @@
 import { useEffect } from 'react'
 import Link from 'next/link'
 import { clsx } from 'clsx'
-import { X, Phone, ArrowRight } from 'lucide-react'
+import { X, Phone, MessageSquare, ArrowRight } from 'lucide-react'
 import { Logo } from '@/components/site/Logo'
 import { NAV_LINKS, SITE } from '@/lib/site'
 
@@ -59,9 +59,14 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
         <Link href="/contact" onClick={onClose} className="btn-gold w-full">
           Get a Quote <ArrowRight className="w-4 h-4" />
         </Link>
-        <a href={SITE.phoneHref} className="btn-outline-light w-full">
-          <Phone className="w-4 h-4" /> {SITE.phone}
-        </a>
+        <div className="grid grid-cols-2 gap-3">
+          <a href={SITE.phoneHref} className="btn-outline-light w-full">
+            <Phone className="w-4 h-4" /> Call
+          </a>
+          <a href={SITE.smsHref} className="btn-outline-light w-full">
+            <MessageSquare className="w-4 h-4" /> Text
+          </a>
+        </div>
       </div>
     </div>
   )

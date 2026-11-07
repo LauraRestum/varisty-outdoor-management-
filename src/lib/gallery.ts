@@ -6,7 +6,6 @@ export const GALLERY: { src: string; alt: string; category: Exclude<GalleryFilte
   { src: '/images/photos/garden-path.jpg', alt: 'Garden walkway lined with roses and hedges', category: 'Landscaping' },
   { src: '/images/photos/home-lawn.jpg', alt: 'Modern home with a manicured lawn', category: 'Property Maintenance' },
   { src: '/images/photos/flower-bed.jpg', alt: 'Colorful flower bed planting', category: 'Landscaping' },
-  { src: '/images/photos/snow.jpg', alt: 'Snow-covered walkway in winter', category: 'Seasonal' },
   { src: '/images/photos/crew-trimming.jpg', alt: 'Crew member trimming a front lawn', category: 'Property Maintenance' },
   { src: '/images/photos/hero-mower.jpg', alt: 'Lawn mower on a freshly cut lawn', category: 'Lawn Care' },
   { src: '/images/photos/cottage-garden.jpg', alt: 'Cottage garden in full bloom', category: 'Landscaping' },

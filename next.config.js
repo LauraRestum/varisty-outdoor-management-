@@ -12,6 +12,12 @@ const nextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      // Snow removal is no longer offered
+      { source: '/services/snow-removal', destination: '/services', permanent: false },
+    ]
+  },
   experimental: {
     serverActions: {
       allowedOrigins: ['localhost:3000'],

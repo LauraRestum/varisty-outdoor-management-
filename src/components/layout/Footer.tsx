@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Facebook, Instagram, Linkedin, ArrowRight, Phone, Mail, MapPin } from 'lucide-react'
+import { Facebook, Instagram, Linkedin, ArrowRight, Phone, Mail, MapPin, MessageSquare } from 'lucide-react'
 import { Logo } from '@/components/site/Logo'
 import { NAV_LINKS, SITE } from '@/lib/site'
 import { SERVICES } from '@/lib/services'
@@ -69,7 +69,12 @@ export function Footer() {
             <ul className="space-y-4 text-sm text-white/80">
               <li>
                 <a href={SITE.phoneHref} className="flex items-center gap-3 hover:text-gold transition-colors">
-                  <Phone className="w-4 h-4 text-gold" /> {SITE.phone}
+                  <Phone className="w-4 h-4 text-gold" /> Call {SITE.phone}
+                </a>
+              </li>
+              <li>
+                <a href={SITE.smsHref} className="flex items-center gap-3 hover:text-gold transition-colors">
+                  <MessageSquare className="w-4 h-4 text-gold" /> Text {SITE.owner}
                 </a>
               </li>
               <li>

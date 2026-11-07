@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
-import { PageHero, QuoteCta, ValueIcons } from '@/components/site/Blocks'
+import { PageHero, QuoteCta, ValueIcons, SpringRefreshBanner } from '@/components/site/Blocks'
 import { ServiceCard } from '@/components/site/ServiceCard'
 import { SERVICES } from '@/lib/services'
 
 export const metadata: Metadata = {
   title: 'Our Services',
   description:
-    'Lawn care, landscaping, tree and shrub care, snow removal, clean ups, hardscaping, fertilization and irrigation from Varsity Outdoor Services.',
+    'Fall and spring clean ups, tree and shrub care, irrigation winterization, fertilization, landscaping, hardscaping and lawn care from Varsity Outdoor Services.',
 }
 
 export default function ServicesPage() {
@@ -35,6 +35,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      <SpringRefreshBanner />
       <ValueIcons />
       <QuoteCta />
     </>

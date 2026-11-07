@@ -4,7 +4,7 @@ import { ArrowRight, Check } from 'lucide-react'
 import type { Metadata } from 'next'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
-import { ServiceIconStrip, WinningTeamBanner, QuoteCta, SectionHeading } from '@/components/site/Blocks'
+import { ServiceIconStrip, WinningTeamBanner, QuoteCta, SectionHeading, SpringRefreshBanner } from '@/components/site/Blocks'
 import { ServiceCard } from '@/components/site/ServiceCard'
 import { SERVICES } from '@/lib/services'
 import { GALLERY } from '@/lib/gallery'
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title: `${SITE.name} | Professional Outdoor Services in ${SITE.city}`,
 }
 
-const HERO_SERVICES = ['Lawn Care', 'Landscaping', 'Tree & Shrub Care', 'Snow Removal', 'Clean Ups']
+const HERO_SERVICES = ['Fall Clean Ups', 'Leaf Removal', 'Shrub & Tree Pruning', 'Irrigation Winterization', '2027 Spring Refresh']
 
 const WHY = [
   'Locally owned and operated',
@@ -42,12 +42,13 @@ export default function HomePage() {
           <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-forest/80 to-transparent" />
           <div className="relative container-site pt-24 pb-28 md:pt-36 md:pb-40">
             <h1 className="heading-xl max-w-2xl drop-shadow-sm">
-              Professional
+              Get Your Property
               <br />
-              Outdoor Services
-              <br />
-              For a Higher Standard.
+              Ready for Winter.
             </h1>
+            <p className="mt-5 max-w-xl text-white/85 text-base md:text-lg leading-relaxed">
+              Fall clean ups, leaf removal and winter prep now. Then pre-book your 2027 Spring Refresh and save.
+            </p>
             <p className="mt-6 max-w-2xl text-[11px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-white/90 leading-loose">
               {HERO_SERVICES.map((s, i) => (
                 <span key={s}>
@@ -60,14 +61,16 @@ export default function HomePage() {
               <Link href="/contact" className="btn-gold">
                 Get a Quote <ArrowRight className="w-4 h-4" />
               </Link>
-              <Link href="/services" className="btn-outline-light">
-                Our Services
+              <Link href="/spring-refresh" className="btn-outline-light">
+                Pre-Book Spring 2027
               </Link>
             </div>
           </div>
         </section>
 
         <ServiceIconStrip />
+
+        <SpringRefreshBanner />
 
         {/* Intro */}
         <section className="bg-cream">
@@ -115,9 +118,9 @@ export default function HomePage() {
           <div className="container-site py-20 md:py-28">
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
               <SectionHeading
-                eyebrow="Our Services"
-                title="Complete outdoor solutions."
-                lead="From routine maintenance to full property care, we keep your outdoor spaces looking their best."
+                eyebrow="This Fall & Winter"
+                title="Button up your property for winter."
+                lead="Clear the leaves, cut back the beds, prune while plants are dormant and blow out your sprinklers before the first hard freeze."
               />
               <Link href="/services" className="link-arrow flex-shrink-0">
                 View all services <ArrowRight className="w-3.5 h-3.5" />
